@@ -20,7 +20,7 @@
   text-align: center;
   font-size: 3.5rem;
   max-width: 700px;
-  margin: 35px auto;
+  margin: 35px auto 45px auto;
 }
 
 .highlight {
@@ -37,9 +37,9 @@
 
 .description {
   background-color: #F5F5F5;
+  width: fit-content;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid black;
   margin-bottom: 5px;
 }
 
@@ -59,6 +59,11 @@
   border-radius: 10px;
 }
 
+.command-container:hover {
+  cursor: pointer;
+  background-color: #F5F5F5;
+}
+
 .command-icon {
   display: flex;
   width: fit-content;
@@ -75,7 +80,7 @@
 
 .preferences-form {
   display: flex;
-  margin: 5px auto;
+  margin: 15px auto;
   max-width: 700px;
   width: 100%;
   align-items: center;
@@ -85,7 +90,7 @@
 .preferences-input {
   width: 100%;
   font-size: 1.1rem;
-  padding: 18px 55px 18px 18px;
+  padding: 18px 60px 18px 18px;
   border: 2px solid #D4D4D4;
   border-radius: 25px;
 }

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { CiDollar, CiPaperplane } from 'react-icons/ci';
 import { MdLightbulbOutline } from 'react-icons/md';
 import { PiMapPinArea } from 'react-icons/pi';
@@ -13,7 +12,6 @@ const presetCommands = [
 ];
 
 function App() {
-  const [count, setCount] = useState(0)
 
   const submitPreference = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +22,11 @@ function App() {
     console.log("Preferences: ", preferences);
 
     e.currentTarget.reset();
-  }
+  };
+
+  const commandClick = (command: string) => {
+    console.log("This is the command that was clicked: ", command);
+  };
 
   return (
     <>
@@ -39,7 +41,7 @@ function App() {
       </div>
       <div className='command-grid-container'>
         {presetCommands.map((section, index) => (
-          <div key={index} className='command-container'>
+          <div key={index} className='command-container' onClick={() => commandClick(section.command)}>
             <div className='command-icon'>{section.icon}</div>
             <p className='command'>{section.command}</p>
           </div>
