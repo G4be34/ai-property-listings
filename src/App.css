@@ -1,42 +1,123 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px 20px 30px;
+  border-bottom: 1px solid black;
+}
+
+.header-link {
+  font-weight: bold;
+}
+
+.title {
   text-align: center;
+  font-size: 3.5rem;
+  max-width: 700px;
+  margin: 35px auto;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.highlight {
+  background-color: #EFFE52;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.description-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 700px;
+  margin: 20px auto 10px auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.description {
+  background-color: #F5F5F5;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin-bottom: 5px;
 }
 
-.card {
-  padding: 2em;
+.command-grid-container {
+  display: grid;
+  max-width: 700px;
+  margin: 10px auto 20px auto;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 }
 
-.read-the-docs {
-  color: #888;
+.command-container {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
+
+.command-icon {
+  display: flex;
+  width: fit-content;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 5px;
+  background-color: #EFFE52;
+}
+
+.command {
+  text-align: left;
+  margin: 0 5px;
+}
+
+.preferences-form {
+  display: flex;
+  margin: 5px auto;
+  max-width: 700px;
+  width: 100%;
+  align-items: center;
+  position: relative;
+}
+
+.preferences-input {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 18px 55px 18px 18px;
+  border: 2px solid #D4D4D4;
+  border-radius: 25px;
+}
+
+.submit-button {
+  display: flex;
+  background-color: #D4D4D4;
+  border-radius: 50%;
+  padding: 15px;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  margin-left: -50px;
+}
+
+.submit-button:hover {
+  background-color: #bbb8b8;
+  cursor: pointer;
+}
+
+.powered-by-container {
+  display: flex;
+  max-width: 700px;
+  margin: 1px auto;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.powered-by {
+  color: gray;
+  text-align: right;
+}
+
