@@ -46,7 +46,7 @@
 .command-grid-container {
   display: grid;
   max-width: 700px;
-  margin: 10px auto 20px auto;
+  margin: 10px auto 0 auto;
   gap: 10px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -70,7 +70,6 @@
   justify-content: flex-start;
   align-items: center;
   margin: 10px 5px;
-  background-color: #EFFE52;
 }
 
 .command {
@@ -80,7 +79,7 @@
 
 .preferences-form {
   display: flex;
-  margin: 15px auto;
+  margin: 35px auto 0 auto;
   max-width: 700px;
   width: 100%;
   align-items: center;
@@ -114,7 +113,7 @@
 .powered-by-container {
   display: flex;
   max-width: 700px;
-  margin: 1px auto;
+  margin: 1px auto 20px auto;
   align-items: center;
   justify-content: flex-end;
   padding-right: 15px;
