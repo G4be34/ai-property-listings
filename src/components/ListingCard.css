@@ -1,0 +1,92 @@
+.listing-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 16px;
+}
+
+.listing-card-main-img-container img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.listing-card-title {
+  font-weight: bold;
+}
+
+.listing-card-price {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.listing-card-address {
+  margin-bottom: 10px;
+}
+
+.listing-card-sub-img-container {
+  display: grid;
+  margin-top: 5px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+}
+
+.listing-card-sub-img-container img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.listing-card-pros-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  background-color: #F5F5F5;
+  border-radius: 10px;
+  padding: 10px 10px 20px 10px;
+}
+
+.listing-card-title-container {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: 10px auto 10px 5px;
+  background-color: black;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.listing-card-title-container span {
+  margin-left: 5px;
+  color: white;
+}
+
+.listing-card-pros-title {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.listing-card-pros-title span {
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.listing-card-pros-list {
+  padding: 0 0 0 40px;
+}
+
+.listing-card-button {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 10px 40px;
+  background: black;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  max-width: fit-content;
+}

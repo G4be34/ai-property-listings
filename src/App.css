@@ -23,10 +23,6 @@
   margin: 35px auto 45px auto;
 }
 
-.highlight {
-  background-color: #EFFE52;
-}
-
 .description-container {
   display: flex;
   flex-direction: column;
@@ -125,3 +121,10 @@
   text-align: right;
 }
 
+.listing-grid-container {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  max-width: 90%;
+}

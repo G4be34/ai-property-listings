@@ -13,8 +13,56 @@ const presetCommands = [
   { command: 'Find me a place that fits my daily routine', icon: <MdLightbulbOutline size={20} /> },
 ];
 
+const exampleListings = [
+  { title: "AVA Burbank",
+    price: "$2,287 - $2,602",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "In unit laundry available",
+      "Centrally located in Burbank",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Kenwood Mews",
+    price: "$2,312 - $2,470",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Located in residential Burbank with quick access to CA-134",
+      "Pet friendly and smoke-free community",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  }
+];
+
 function App() {
-  const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState(exampleListings);
 
   const submitPreference = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,7 +110,7 @@ function App() {
         <small className='powered-by'>Powered by GPT-4</small>
       </div>
       {listings.length > 0
-        ? <div>
+        ? <div className='listing-grid-container'>
             {listings.map((listing, index) => (
               <ListingCard key={index} listing={listing} />
             ))}
