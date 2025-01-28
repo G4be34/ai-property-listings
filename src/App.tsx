@@ -4,8 +4,7 @@ import { MdLightbulbOutline } from 'react-icons/md';
 import { PiMapPinArea } from 'react-icons/pi';
 import { TbBed } from 'react-icons/tb';
 import './App.css';
-import ListingCard, { mapListings, Listing, ListingRecord } from './components/ListingCard';
-import axios from 'axios';
+import ListingCard, { Listing } from './components/ListingCard';
 import ThemeToggle from './components/ThemeToggle';
 
 const presetCommands = [
@@ -60,11 +59,252 @@ const exampleListings = [
       "Located in preferred Burbank, CA",
     ],
     link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
-  }
+  },
+  { title: "AVA Burbank",
+    price: "$2,287 - $2,602",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "In unit laundry available",
+      "Centrally located in Burbank",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "AVA Burbank",
+    price: "$2,287 - $2,602",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "In unit laundry available",
+      "Centrally located in Burbank",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "AVA Burbank",
+    price: "$2,287 - $2,602",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "In unit laundry available",
+      "Centrally located in Burbank",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "AVA Burbank",
+    price: "$2,287 - $2,602",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "In unit laundry available",
+      "Centrally located in Burbank",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "AVA Burbank",
+    price: "$2,287 - $2,602",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "In unit laundry available",
+      "Centrally located in Burbank",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "AVA Burbank",
+    price: "$2,287 - $2,602",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "In unit laundry available",
+      "Centrally located in Burbank",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "AVA Burbank",
+    price: "$2,287 - $2,602",
+    address: "McNeil, Burbank, CA 91505",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "In unit laundry available",
+      "Centrally located in Burbank",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
+  { title: "Luxe at Burbank",
+    price: "$2,195",
+    address: "1731 Rogers Place, Burbank, CA 91504",
+    mainImg: "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    subImgs: [
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ],
+    pros: [
+      "Within budget at $2,195",
+      "Located in preferred Burbank, CA",
+    ],
+    link: "https://www.pexels.com/photo/blue-and-gray-concrete-house-with-attic-during-twilight-186077/"
+  },
 ];
 
 function App() {
   const [listings, setListings] = useState<Listing[]>([]);
+  const [visibleListings, setVisibleListings] = useState<Listing[]>([]);
 
   // todo: we probably want to add a loading state to the button and disable it while the request is being made
   const submitPreference = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -74,10 +314,17 @@ function App() {
     const preferences = formData.get('preferences') as string;
 
     // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
-    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences });
-    const listingRecords = res.data.matches as ListingRecord[];
-    const listings = mapListings(listingRecords);
-    setListings(listings);
+    // const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences });
+    // const listingRecords = res.data.matches as ListingRecord[];
+    // const listings = mapListings(listingRecords);
+
+    setListings(exampleListings);
+    setVisibleListings(exampleListings.slice(0, 6));
+  };
+
+  const loadMoreListings = () => {
+    const nextListings = listings.slice(visibleListings.length, visibleListings.length + 6);
+    setVisibleListings(prevListings => [...prevListings, ...nextListings]);
   };
 
   const commandClick = (command: string) => {
@@ -115,11 +362,16 @@ function App() {
         <small className='powered-by'>Powered by GPT-4</small>
       </div>
       {listings.length > 0
-        ? <div className='listing-grid-container'>
-            {listings.map((listing, index) => (
-              <ListingCard key={index} listing={listing} />
-            ))}
-          </div>
+        ? <>
+            <div className='listing-grid-container'>
+              {visibleListings.map((listing, index) => (
+                <ListingCard key={index} listing={listing} />
+              ))}
+            </div>
+            {visibleListings.length < listings.length
+              ? <button className='load-more-button' onClick={loadMoreListings}>Load more</button>
+              : null}
+          </>
         : null}
     </>
   )

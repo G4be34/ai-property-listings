@@ -122,6 +122,15 @@
   max-width: 90%;
 }
 
+.load-more-button {
+  display: flex;
+  max-width: fit-content;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 10px auto 40px auto;
+  cursor: pointer;
+}
+
 /* media query for mobile */
 @media (max-width: 800px) {
   .command-grid-container {

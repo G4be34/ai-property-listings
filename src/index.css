@@ -39,6 +39,7 @@ body {
   --input-border: #555; /* Dark input border */
   --button-bg: #555; /* Dark button background */
   --button-bg-hover: #444; /* Dark button hover */
+  --description-bg: #333;
   --command-bg: #333; /* Dark command container */
   --command-hover-bg: #444; /* Dark command hover */
   --header-bg: #333; /* Dark header background */
