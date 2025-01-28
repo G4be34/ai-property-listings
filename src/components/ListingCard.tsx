@@ -1,4 +1,3 @@
-import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { RiPokerDiamondsLine } from "react-icons/ri";
 import "./ListingCard.css";
 
@@ -17,19 +16,10 @@ function ListingCard({ listing }) {
       <div className="listing-card-main-img-container">
         <img src={listing.mainImg} alt={listing.title} />
       </div>
-      <div className="listing-card-sub-img-container">
-        {listing.subImgs.map((subImg, index) => (
-          <img key={index} src={subImg} alt={listing.title + index} />
-        ))}
-      </div>
       <div className="listing-card-pros-container">
         <div className="listing-card-title-container">
           <RiPokerDiamondsLine style={{ color: "white" }} />
-          <span>Sunny thinks it's worth a shot</span>
-        </div>
-        <div className="listing-card-pros-title">
-          <IoIosCheckmarkCircleOutline size={30} />
-          <span>Pros</span>
+          <span>Your requirements</span>
         </div>
         <ul className="listing-card-pros-list">
           {listing.pros.map((pro, index) => (

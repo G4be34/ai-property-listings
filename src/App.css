@@ -9,7 +9,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px 20px 30px;
-  border-bottom: 1px solid black;
 }
 
 .header-link {
@@ -32,7 +31,6 @@
 }
 
 .description {
-  background-color: #F5F5F5;
   width: fit-content;
   padding: 20px;
   border-radius: 10px;
@@ -51,13 +49,11 @@
 .command-container {
   width: 100%;
   padding: 10px;
-  border: 1px solid black;
   border-radius: 10px;
 }
 
 .command-container:hover {
   cursor: pointer;
-  background-color: #F5F5F5;
 }
 
 .command-icon {
@@ -86,13 +82,11 @@
   width: 100%;
   font-size: 1.1rem;
   padding: 18px 60px 18px 18px;
-  border: 2px solid #D4D4D4;
   border-radius: 25px;
 }
 
 .submit-button {
   display: flex;
-  background-color: #D4D4D4;
   border-radius: 50%;
   padding: 15px;
   border: none;
@@ -102,7 +96,6 @@
 }
 
 .submit-button:hover {
-  background-color: #bbb8b8;
   cursor: pointer;
 }
 

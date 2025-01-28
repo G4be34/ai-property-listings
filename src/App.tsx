@@ -5,6 +5,7 @@ import { PiMapPinArea } from 'react-icons/pi';
 import { TbBed } from 'react-icons/tb';
 import './App.css';
 import ListingCard from './components/ListingCard';
+import ThemeToggle from './components/ThemeToggle';
 
 const presetCommands = [
   { command: 'Tell me which city is best for me', icon: <PiMapPinArea size={20} /> },
@@ -62,7 +63,7 @@ const exampleListings = [
 ];
 
 function App() {
-  const [listings, setListings] = useState(exampleListings);
+  const [listings, setListings] = useState([]);
 
   const submitPreference = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,6 +72,8 @@ function App() {
     const preferences = formData.get('preferences') as string;
 
     console.log("Preferences: ", preferences);
+
+    setListings(exampleListings);
 
     e.currentTarget.reset();
   };
@@ -83,11 +86,11 @@ function App() {
     <>
       <header className='header'>
         <h1 className='header-title'>Finding Places</h1>
-        <p className='header-link'>About</p>
+        <ThemeToggle />
       </header>
       {listings.length === 0
         ? <>
-            <h2 className='title'>AI-Powered search for your <span className='highlight'>perfect home</span></h2>
+            <h2 className='title'>AI-Powered home search and property inspection</h2>
             <div className='description-container'>
               <p className='description'>I'll help you find your ideal apartment. Share your preferences for location, budget, and features, and I'll do the rest</p>
               <p className='description'>Or I can help you in other ways shown below!</p>
