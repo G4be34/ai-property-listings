@@ -1,14 +1,13 @@
 import { RiPokerDiamondsLine } from "react-icons/ri";
 import "./ListingCard.css";
 
-function ListingCard({ listing }: { listing: Listing }) {
+export function ListingCard({ listing }: { listing: Listing }) {
   const openListing = () => {
-    console.log("Opening listing");
-    console.log("This is the link: ", listing.link);
+    window.open(listing.link, "_blank");
   };
 
   return (
-    <div className="listing-card">
+    <div className="listing-card" onClick={openListing}>
       <h2 className="listing-card-title">{listing.title}</h2>
       <p className="listing-card-price">{listing.price}</p>
       <small className="listing-card-address">{listing.address}</small>
@@ -69,6 +68,4 @@ export function mapListings(records: ListingRecord[]): Listing[] {
           link: record.url
       };
   });
-}
-
-export default ListingCard;
+};

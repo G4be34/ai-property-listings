@@ -1,10 +1,11 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { CiDollar, CiPaperplane } from 'react-icons/ci';
 import { MdLightbulbOutline } from 'react-icons/md';
 import { PiMapPinArea } from 'react-icons/pi';
 import { TbBed } from 'react-icons/tb';
 import './App.css';
-import ListingCard, { Listing } from './components/ListingCard';
+import { Listing, ListingCard, ListingRecord, mapListings } from './components/ListingCard';
 import ThemeToggle from './components/ThemeToggle';
 
 const presetCommands = [
@@ -305,21 +306,27 @@ const exampleListings = [
 function App() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [visibleListings, setVisibleListings] = useState<Listing[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-  // todo: we probably want to add a loading state to the button and disable it while the request is being made
   const submitPreference = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
     const preferences = formData.get('preferences') as string;
 
     // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
-    // const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences });
-    // const listingRecords = res.data.matches as ListingRecord[];
-    // const listings = mapListings(listingRecords);
+    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences });
+    const listingRecords = res.data.matches as ListingRecord[];
+    const listings = mapListings(listingRecords);
 
-    setListings(exampleListings);
-    setVisibleListings(exampleListings.slice(0, 6));
+    setListings(listings);
+    setVisibleListings(listings.slice(0, 6));
+
+    setIsLoading(false);
+    setIsDataLoaded(true);
   };
 
   const loadMoreListings = () => {
@@ -337,7 +344,7 @@ function App() {
         <h1 className='header-title'>Finding Places</h1>
         <ThemeToggle />
       </header>
-      {listings.length === 0
+      {listings.length === 0 && !isDataLoaded
         ? <>
             <h2 className='title'>AI-Powered home search and property inspection</h2>
             <div className='description-container'>
@@ -353,10 +360,12 @@ function App() {
               ))}
             </div>
           </>
-        : null}
+        : <div className="hide-elements" />}
       <form onSubmit={submitPreference} className='preferences-form'>
         <input className='preferences-input' type="text" name="preferences" placeholder='Tell me your preferences' />
-        <button type='submit' className='submit-button'><CiPaperplane size={25} style={{ strokeWidth: 0.5}} /></button>
+        <button type='submit' className='submit-button' disabled={isLoading}>
+          {isLoading ? <div className='loader'></div> : <CiPaperplane size={25} style={{ strokeWidth: 0.5}} />}
+        </button>
       </form>
       <div className='powered-by-container'>
         <small className='powered-by'>Powered by GPT-4</small>
