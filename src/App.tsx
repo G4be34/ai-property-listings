@@ -4,7 +4,8 @@ import { MdLightbulbOutline } from 'react-icons/md';
 import { PiMapPinArea } from 'react-icons/pi';
 import { TbBed } from 'react-icons/tb';
 import './App.css';
-import ListingCard from './components/ListingCard';
+import ListingCard, { mapListings, Listing, ListingRecord } from './components/ListingCard';
+import axios from 'axios';
 import ThemeToggle from './components/ThemeToggle';
 
 const presetCommands = [
@@ -63,19 +64,20 @@ const exampleListings = [
 ];
 
 function App() {
-  const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState<Listing[]>([]);
 
-  const submitPreference = (e: React.FormEvent<HTMLFormElement>) => {
+  // todo: we probably want to add a loading state to the button and disable it while the request is being made
+  const submitPreference = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const preferences = formData.get('preferences') as string;
 
-    console.log("Preferences: ", preferences);
-
-    setListings(exampleListings);
-
-    e.currentTarget.reset();
+    // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
+    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences });
+    const listingRecords = res.data.matches as ListingRecord[];
+    const listings = mapListings(listingRecords);
+    setListings(listings);
   };
 
   const commandClick = (command: string) => {
