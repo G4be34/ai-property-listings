@@ -6,6 +6,7 @@ import { PiMapPinArea } from 'react-icons/pi';
 import { TbBed } from 'react-icons/tb';
 import './App.css';
 import { ListingCard } from './components/ListingCard/ListingCard';
+import RequestModal from './components/RequestModal/RequestModal';
 import ThemeToggle from './components/ThemeToggle';
 import { Listing, ListingRecord, mapListings } from './utils';
 
@@ -310,6 +311,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [loadingCommand, setLoadingCommand] = useState(false);
+  const [showModal, setShowModal] = useState(true);
+
+  const pageNum = 1;
 
   const submitPreference = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -320,7 +324,7 @@ function App() {
     const preferences = formData.get('preferences') as string;
 
     // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
-    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences });
+    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences, page: 1 });
     const listingRecords = res.data.matches as ListingRecord[];
     const listings = mapListings(listingRecords);
 
@@ -339,7 +343,7 @@ function App() {
   const commandClick = async (command: string) => {
     setLoadingCommand(true);
 
-    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: command });
+    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: command, page: 1 });
     const listingRecords = res.data.matches as ListingRecord[];
     const listings = mapListings(listingRecords);
 
@@ -352,6 +356,7 @@ function App() {
   return (
     <>
       {loadingCommand && <div className='large-loader'></div>}
+      {showModal && <RequestModal setShowModal={setShowModal} />}
       <header className='header'>
         <h1 className='header-title' onClick={() => window.location.reload()}>Finding Places</h1>
         <ThemeToggle />
