@@ -5,8 +5,9 @@ import { MdLightbulbOutline } from 'react-icons/md';
 import { PiMapPinArea } from 'react-icons/pi';
 import { TbBed } from 'react-icons/tb';
 import './App.css';
-import { Listing, ListingCard, ListingRecord, mapListings } from './components/ListingCard';
+import { ListingCard } from './components/ListingCard/ListingCard';
 import ThemeToggle from './components/ThemeToggle';
+import { Listing, ListingRecord, mapListings } from './utils';
 
 const presetCommands = [
   { command: 'Tell me which city is best for me', icon: <PiMapPinArea size={20} /> },
@@ -308,6 +309,7 @@ function App() {
   const [visibleListings, setVisibleListings] = useState<Listing[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [loadingCommand, setLoadingCommand] = useState(false);
 
   const submitPreference = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -334,14 +336,24 @@ function App() {
     setVisibleListings(prevListings => [...prevListings, ...nextListings]);
   };
 
-  const commandClick = (command: string) => {
-    console.log("This is the command that was clicked: ", command);
+  const commandClick = async (command: string) => {
+    setLoadingCommand(true);
+
+    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: command });
+    const listingRecords = res.data.matches as ListingRecord[];
+    const listings = mapListings(listingRecords);
+
+    setListings(listings);
+    setVisibleListings(listings.slice(0, 6));
+
+    setLoadingCommand(false);
   };
 
   return (
     <>
+      {loadingCommand && <div className='large-loader'></div>}
       <header className='header'>
-        <h1 className='header-title'>Finding Places</h1>
+        <h1 className='header-title' onClick={() => window.location.reload()}>Finding Places</h1>
         <ThemeToggle />
       </header>
       {listings.length === 0 && !isDataLoaded
