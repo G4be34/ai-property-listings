@@ -311,7 +311,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [loadingCommand, setLoadingCommand] = useState(false);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const pageNum = 1;
 
@@ -327,6 +327,8 @@ function App() {
     const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences, page: 1 });
     const listingRecords = res.data.matches as ListingRecord[];
     const listings = mapListings(listingRecords);
+
+    console.log("Listings:", listings);
 
     setListings(listings);
     setVisibleListings(listings.slice(0, 6));
@@ -380,7 +382,7 @@ function App() {
         : <div className="hide-elements" />}
       <form onSubmit={submitPreference} className='preferences-form'>
         <input className='preferences-input' type="text" name="preferences" placeholder='Tell me your preferences' />
-        <button type='submit' className='submit-button' disabled={isLoading}>
+        <button type='submit' className='submit-button' disabled={isLoading || loadingCommand}>
           {isLoading ? <div className='loader'></div> : <CiPaperplane size={25} style={{ strokeWidth: 0.5}} />}
         </button>
       </form>

@@ -19,7 +19,7 @@
   text-align: center;
   font-size: 3.5rem;
   max-width: 700px;
-  margin: 35px auto 45px auto;
+  margin: 75px auto 45px auto;
 }
 
 .description-container {
@@ -27,11 +27,12 @@
   flex-direction: column;
   justify-content: flex-start;
   max-width: 700px;
-  margin: 20px auto 10px auto;
+  margin: 40px auto 30px auto;
 }
 
 .description {
   width: fit-content;
+  font-size: 1.1rem;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 5px;
@@ -40,7 +41,7 @@
 .command-grid-container {
   display: grid;
   max-width: 700px;
-  margin: 10px auto 0 auto;
+  margin: 30px auto 30px auto;
   gap: 10px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -71,7 +72,7 @@
 
 .preferences-form {
   display: flex;
-  margin: 35px auto 0 auto;
+  margin: 45px auto 0 auto;
   max-width: 700px;
   width: 100%;
   align-items: center;

@@ -1,19 +1,31 @@
+import axios from "axios";
+import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import "./RequestModal.css";
 
 export default function RequestModal({ setShowModal }: { setShowModal: React.Dispatch<React.SetStateAction<boolean>> }) {
+  const [isLoading, setIsLoading] = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
   };
 
-  const submitPhoneNumber = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitPhoneNumber = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const phoneNumber = formData.get('phoneNumber') as string;
+    try {
+      const formData = new FormData(e.currentTarget);
+      const phoneNumber = formData.get('phoneNumber') as string;
 
-    console.log(phoneNumber);
+      axios.post('/api/sendEmail', { phone: phoneNumber });
+
+      setIsLoading(false);
+      setShowModal(false);
+    } catch (error) {
+      console.log("Error submitting phone number:", error);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -27,7 +39,7 @@ export default function RequestModal({ setShowModal }: { setShowModal: React.Dis
           <small className="request-modal-input-label">Your Phone Number</small>
           <div className="request-modal-input-container">
             <input type="text" className="request-modal-input" placeholder="Enter your number" name="phoneNumber" />
-            <button type="submit" className="request-modal-button">Continue</button>
+            <button type="submit" className="request-modal-button" disabled={isLoading}>{isLoading ? "Submitting..." : "Submit"}</button>
           </div>
         </form>
       </dialog>
