@@ -318,23 +318,28 @@ function App() {
   const submitPreference = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const preferences = formData.get('preferences') as string;
+      const formData = new FormData(e.currentTarget);
+      const preferences = formData.get('preferences') as string;
 
-    // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
-    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences, page: 1 });
-    const listingRecords = res.data.matches as ListingRecord[];
-    const listings = mapListings(listingRecords);
+      // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
+      const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences, page: 1 });
+      const listingRecords = res.data.matches as ListingRecord[];
+      const listings = mapListings(listingRecords);
 
-    console.log("Listings:", listings);
+      console.log("Listings:", listings);
 
-    setListings(listings);
-    setVisibleListings(listings.slice(0, 6));
+      setListings(listings);
+      setVisibleListings(listings.slice(0, 6));
 
-    setIsLoading(false);
-    setIsDataLoaded(true);
+      setIsDataLoaded(true);
+    } catch (error) {
+      console.log("Error submitting preferences:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const loadMoreListings = () => {
@@ -343,16 +348,20 @@ function App() {
   };
 
   const commandClick = async (command: string) => {
-    setLoadingCommand(true);
+    try {
+      setLoadingCommand(true);
 
-    const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: command, page: 1 });
-    const listingRecords = res.data.matches as ListingRecord[];
-    const listings = mapListings(listingRecords);
+      const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: command, page: 1 });
+      const listingRecords = res.data.matches as ListingRecord[];
+      const listings = mapListings(listingRecords);
 
-    setListings(listings);
-    setVisibleListings(listings.slice(0, 6));
-
-    setLoadingCommand(false);
+      setListings(listings);
+      setVisibleListings(listings.slice(0, 6));
+    } catch (error) {
+      console.log("Error submitting preset command:", error);
+    } finally {
+      setLoadingCommand(false);
+    }
   };
 
   return (
