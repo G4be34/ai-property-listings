@@ -163,25 +163,12 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Slide and fade out when the data is loaded */
-@keyframes slideUpFadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-}
-
-/* Apply this animation to the elements to be animated */
-.hide-elements {
-  animation: slideUpFadeOut 0.5s ease-out forwards;
-}
-
 /* media query for mobile */
 @media (max-width: 800px) {
+  .description-container {
+    margin: 40px 2em 30px 2em;
+  }
+
   .command-grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);

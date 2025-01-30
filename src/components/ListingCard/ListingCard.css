@@ -5,15 +5,15 @@
   padding: 16px;
 }
 
-.listing-card:hover {
-  cursor: pointer;
-}
-
 .listing-card-main-img-container img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.listing-card-main-img-container img:hover {
+  cursor: pointer;
 }
 
 .listing-card-title {
