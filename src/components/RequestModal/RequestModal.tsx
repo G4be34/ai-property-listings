@@ -1,4 +1,5 @@
 import axios from "axios";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import "./RequestModal.css";
@@ -31,7 +32,7 @@ export default function RequestModal({ setShowModal }: { setShowModal: React.Dis
   return (
     <div className="modal-container">
       <div className="modal-background" onClick={closeModal}></div>
-      <dialog className="modal-body" open>
+      <motion.dialog transition={{ type: "spring" }} animate={{ scale: 1.2 }} className="modal-body" open>
         <button type="button" className="close-button" onClick={closeModal}><MdClose size={15} /></button>
         <p className="request-modal-title">We will go and visit this property for you!</p>
         <p className="request-modal-title">We take photos, videos, write a report, and even tour the neighborhood for you!</p>
@@ -42,7 +43,7 @@ export default function RequestModal({ setShowModal }: { setShowModal: React.Dis
             <button type="submit" className="request-modal-button" disabled={isLoading}>{isLoading ? "Submitting..." : "Submit"}</button>
           </div>
         </form>
-      </dialog>
+      </motion.dialog>
     </div>
   )
 };

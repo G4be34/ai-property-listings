@@ -375,7 +375,7 @@ function App() {
       </header>
       <AnimatePresence>
         {listings.length === 0
-          && <motion.div key="options" exit={{ opacity: 0, y: -50 }} transition={{ duration: 0.5}}>
+          && <motion.div key="options" exit={{ opacity: 0, y: -25 }} transition={{ duration: 0.5}}>
               <h2 className='title'>AI-Powered home search and property inspection</h2>
               <div className='description-container'>
                 <p className='description'>I'll help you find your ideal apartment. Share your preferences for location, budget, and features, and I'll do the rest</p>

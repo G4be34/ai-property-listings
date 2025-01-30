@@ -19,7 +19,7 @@
   text-align: center;
   font-size: 3.5rem;
   max-width: 700px;
-  margin: 75px auto 45px auto;
+  margin: 85px auto 65px auto;
 }
 
 .description-container {
@@ -27,7 +27,7 @@
   flex-direction: column;
   justify-content: flex-start;
   max-width: 700px;
-  margin: 40px auto 30px auto;
+  margin: 40px auto 40px auto;
 }
 
 .description {
@@ -41,7 +41,7 @@
 .command-grid-container {
   display: grid;
   max-width: 700px;
-  margin: 30px auto 30px auto;
+  margin: 60px auto 30px auto;
   gap: 10px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -165,6 +165,10 @@
 
 /* media query for mobile */
 @media (max-width: 800px) {
+  .title {
+    margin: 75px 1em 45px 1em;
+  }
+
   .description-container {
     margin: 40px 2em 30px 2em;
   }
@@ -172,6 +176,7 @@
   .command-grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
+    padding: 0 2em 0 2em;
   }
 
   .powered-by-container {
