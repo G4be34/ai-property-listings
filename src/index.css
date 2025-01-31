@@ -210,7 +210,7 @@ header {
 }
 
 .listing-card:hover {
-  border: 2px solid var(--input-border);
+  border-color: var(--input-border);
   border-radius: 10px;
 }
 

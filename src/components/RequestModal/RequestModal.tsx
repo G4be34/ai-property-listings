@@ -4,7 +4,12 @@ import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import "./RequestModal.css";
 
-export default function RequestModal({ setShowModal }: { setShowModal: React.Dispatch<React.SetStateAction<boolean>> }) {
+type RequestModalProps = {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showToast: (type: 'success' | 'error') => void;
+};
+
+export default function RequestModal({ setShowModal, showToast }: RequestModalProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const closeModal = () => {
@@ -22,10 +27,13 @@ export default function RequestModal({ setShowModal }: { setShowModal: React.Dis
       axios.post('/api/sendEmail', { phone: phoneNumber });
 
       setIsLoading(false);
-      setShowModal(false);
+      showToast('success');
     } catch (error) {
       console.log("Error submitting phone number:", error);
+      showToast('error');
       setIsLoading(false);
+    } finally {
+      setShowModal(false);
     }
   };
 

@@ -17,15 +17,18 @@ export function ListingCard({ listing, setShowModal }: { listing: Listing, setSh
         <img src={listing.mainImg} alt={listing.title} />
       </div>
       <div className="listing-card-pros-container">
-        <div className="listing-card-title-container">
-          <RiPokerDiamondsLine style={{ color: "white" }} />
-          <span>Your requirements</span>
-        </div>
-        <ul className="listing-card-pros-list">
-          {listing.pros.map((pro, index) => (
-            <li key={index}><small>{pro}</small></li>
-          ))}
-        </ul>
+        {listing.pros.length > 0
+          && <>
+              <div className="listing-card-title-container">
+                <RiPokerDiamondsLine style={{ color: "white" }} />
+                <span>Your requirements</span>
+              </div>
+              <ul className="listing-card-pros-list">
+                {listing.pros.map((pro, index) => (
+                  <li key={index}><small>{pro}</small></li>
+                ))}
+              </ul>
+             </>}
         <button className="listing-card-button" type="button" onClick={() => setShowModal(true)}>I want this checked out</button>
       </div>
     </motion.div>
