@@ -308,61 +308,59 @@ const exampleListings = [
 
 function App() {
   const [listings, setListings] = useState<Listing[]>([]);
-  const [visibleListings, setVisibleListings] = useState<Listing[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [loadingCommand, setLoadingCommand] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const pageNum = 1;
+  const [pagingData, setPagingData] = useState({
+    page: 0,
+    count: 0,
+    totalPages: 1,
+    searchText: ''
+  })
 
-  const submitPreference = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const search = async (searchText:string, page=0, pageSize=6) =>{
     try {
       setIsLoading(true);
-
-      const formData = new FormData(e.currentTarget);
-      const preferences = formData.get('preferences') as string;
-
       // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
-      // const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: preferences, page: 1 });
-      // const listingRecords = res.data.matches as ListingRecord[];
-      // const listings = mapListings(listingRecords);
+      const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: searchText, page, pageSize });
+      // const res = await axios.post('http://localhost:3010/search', { text: searchText, page, pageSize });
+      const listingRecords = res.data.matches as ListingRecord[];
+      const found = mapListings(listingRecords);
 
-      console.log("Listings:", listings);
+      // console.log("Listings:", found);
 
-      setListings(exampleListings);
-      setVisibleListings(exampleListings.slice(0, 6));
+      if(page===0) setListings(found)
+      else setListings([...listings, ...found])
+      setPagingData({
+        page: 0,
+        totalPages: res.data.totalPages,
+        count: res.data.count,
+        searchText: searchText
+      })
 
-      setIsDataLoaded(true);
     } catch (error) {
       console.log("Error submitting preferences:", error);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  const submitPreference = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const preferences = formData.get('preferences') as string;
+
+    await search(preferences, 0)
   };
 
   const loadMoreListings = () => {
-    const nextListings = listings.slice(visibleListings.length, visibleListings.length + 6);
-    setVisibleListings(prevListings => [...prevListings, ...nextListings]);
+    search(pagingData.searchText, pagingData.page+1)
   };
 
   const commandClick = async (command: string) => {
-    try {
-      setLoadingCommand(true);
-
-      const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: command, page: 1 });
-      const listingRecords = res.data.matches as ListingRecord[];
-      const listings = mapListings(listingRecords);
-
-      setListings(listings);
-      setVisibleListings(listings.slice(0, 6));
-    } catch (error) {
-      console.log("Error submitting preset command:", error);
-    } finally {
-      setLoadingCommand(false);
-    }
+    search(command)
   };
 
   return (
@@ -400,14 +398,17 @@ function App() {
       <div className='powered-by-container'>
         <small className='powered-by'>Powered by GPT-4</small>
       </div>
+      {
+        console.log(listings)
+      }
       {listings.length > 0
         && <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.5 }}>
             <div className='listing-grid-container'>
-              {visibleListings.map((listing, index) => (
+              {listings.map((listing, index) => (
                 <ListingCard key={index} listing={listing} setShowModal={setShowModal} />
               ))}
             </div>
-            {visibleListings.length < listings.length
+            {pagingData.page < pagingData.totalPages
               ? <button className='load-more-button' onClick={loadMoreListings}>Load more</button>
               : null}
           </motion.div>}
