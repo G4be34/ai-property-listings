@@ -26,8 +26,6 @@ function App() {
   const [loadingCommand, setLoadingCommand] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [loadingMoreListings, setLoadingMoreListings] = useState(false);
-  const [successToast, setSuccessToast] = useState(false);
-  const [errorToast, setErrorToast] = useState(false);
   const [pagingData, setPagingData] = useState({
     page: 0,
     count: 0,
