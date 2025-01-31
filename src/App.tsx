@@ -328,7 +328,7 @@ function App() {
       const listingRecords = res.data.matches as ListingRecord[];
       const found = mapListings(listingRecords);
 
-      // console.log("Listings:", found);
+      console.log("Listings:", found);
 
       if(page===0) setListings(found)
       else setListings([...listings, ...found])
@@ -398,9 +398,6 @@ function App() {
       <div className='powered-by-container'>
         <small className='powered-by'>Powered by GPT-4</small>
       </div>
-      {
-        console.log(listings)
-      }
       {listings.length > 0
         && <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.5 }}>
             <div className='listing-grid-container'>
