@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import mapboxgl from 'mapbox-gl';
+import { useEffect, useState } from 'react';
 import { CiDollar, CiPaperplane } from 'react-icons/ci';
 import { MdLightbulbOutline } from 'react-icons/md';
 import { PiMapPinArea } from 'react-icons/pi';
 import { TbBed } from 'react-icons/tb';
 import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
+import { FilterOption } from './components/filterOption/FilterOption';
 import { ListingCard } from './components/ListingCard/ListingCard';
 import RequestModal from './components/RequestModal/RequestModal';
 import ThemeToggle from './components/ThemeToggle';
@@ -19,9 +21,84 @@ const presetCommands = [
   { command: 'Find me a place that fits my daily routine', icon: <MdLightbulbOutline size={20} /> },
 ];
 
+const filterOptions = [
+  {
+    label: "Beds & Baths",
+    options: ["testing", "testing2", "testing3"],
+  },
+  {
+    label: "Home Type",
+    options: ["Houses", "Apartments/Condos", "Townhomes", "Room"],
+  },
+  {
+    label: "Lease",
+    options: ["Short Term", "Long Term"],
+  },
+  {
+    label: "Amenities",
+    options: ["Pet Friendly", "Washer and Dryer", "One Site Parking", "Furnished"]
+  },
+  {
+    label: "Style",
+    options: ["Traditional", "Modern", "Spanish/Mediterranean", "Luxury"]
+  }
+]
+
+const testListings = [
+  {
+    address: "7010 Sepulveda Blvd, Van Nuys, CA",
+    title: "Listing in Los Angeles",
+    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
+    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
+    price: "$1875.00/month",
+    pros: ["Washer/Dryer included", "Pet-friendly"],
+  },
+  {
+    address: "7010 Sepulveda Blvd, Van Nuys, CA",
+    title: "Listing in Los Angeles",
+    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
+    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
+    price: "$1875.00/month",
+    pros: ["Washer/Dryer included", "Pet-friendly"],
+  },
+  {
+    address: "7010 Sepulveda Blvd, Van Nuys, CA",
+    title: "Listing in Los Angeles",
+    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
+    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
+    price: "$1875.00/month",
+    pros: ["Washer/Dryer included", "Pet-friendly"],
+  },
+  {
+    address: "7010 Sepulveda Blvd, Van Nuys, CA",
+    title: "Listing in Los Angeles",
+    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
+    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
+    price: "$1875.00/month",
+    pros: ["Washer/Dryer included", "Pet-friendly"],
+  },
+  {
+    address: "7010 Sepulveda Blvd, Van Nuys, CA",
+    title: "Listing in Los Angeles",
+    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
+    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
+    price: "$1875.00/month",
+    pros: ["Washer/Dryer included", "Pet-friendly"],
+  },
+  {
+    address: "7010 Sepulveda Blvd, Van Nuys, CA",
+    title: "Listing in Los Angeles",
+    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
+    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
+    price: "$1875.00/month",
+    pros: ["Washer/Dryer included", "Pet-friendly"],
+  },
+];
+
+const mapBoxAccessToken = "pk.eyJ1IjoiZzRiZTM0IiwiYSI6ImNtNzJqMDU1YzBheXoyam9qMDQ3Nms2Z2wifQ.DqP8i3w9oQJ75-P4UIuyDg";
 
 function App() {
-  const [listings, setListings] = useState<Listing[]>([]);
+  const [listings, setListings] = useState<Listing[]>(testListings);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingCommand, setLoadingCommand] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -92,14 +169,24 @@ function App() {
   const commandClick = async (command: string) => {
     try {
       setLoadingCommand(true);
-      await search(command)
-
+      await search(command);
     } catch (error) {
       console.error("Error executing command:", error);
     } finally {
       setLoadingCommand(false);
     }
   };
+
+  useEffect(() => {
+    mapboxgl.accessToken = mapBoxAccessToken;
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/standard',
+      center: [-74.5, 40],
+      zoom: 9,
+    })
+  }, []);
 
   return (
     <>
@@ -138,16 +225,28 @@ function App() {
       </div>
       {listings.length > 0
         && <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.5 }}>
-            <div className='listing-grid-container'>
-              {listings.map((listing, index) => (
-                <ListingCard key={index} listing={listing} setShowModal={setShowModal} />
-              ))}
+            <div className='main-body-container'>
+              <div className='filters-container'>
+                {filterOptions.map((option, index) => (
+                  <FilterOption key={index} label={option.label} options={option.options} />
+                ))}
+              </div>
+              <div className='map-and-listings-container'>
+                <div id='map' style={{ height: '100%', width: '50%'}}></div>
+                <div className='listings-and-button-container'>
+                  <div className='listing-grid-container'>
+                    {listings.map((listing, index) => (
+                      <ListingCard key={index} listing={listing} setShowModal={setShowModal} />
+                    ))}
+                  </div>
+                  {pagingData.page < pagingData.totalPages
+                    ? <button className='load-more-button' onClick={loadMoreListings}>
+                        {loadingMoreListings ? <div className='loader'></div> : "Load More"}
+                      </button>
+                    : null}
+                </div>
+              </div>
             </div>
-            {pagingData.page < pagingData.totalPages
-              ? <button className='load-more-button' onClick={loadMoreListings}>
-                  {loadingMoreListings ? <div className='loader'></div> : "Load More"}
-                </button>
-              : null}
           </motion.div>}
         <ToastContainer />
     </>

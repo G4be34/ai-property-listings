@@ -115,10 +115,34 @@
   text-align: right;
 }
 
+.main-body-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.filters-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.map-and-listings-container {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.listings-and-button-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .listing-grid-container {
   display: grid;
   margin: 0 auto;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
   max-width: 90%;
 }
