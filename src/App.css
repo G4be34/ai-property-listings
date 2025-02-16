@@ -148,7 +148,31 @@
   flex-grow: 1;
   border-left: 1px solid lightgray;
   max-height: 100%;
+  padding-top: 15px;
 }
+
+/* Custom scrollbar for listings-and-button-container */
+.listings-and-button-container::-webkit-scrollbar {
+  width: 10px; 
+}
+
+/* Hide scrollbar up/down arrows */
+.listings-and-button-container::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Style and round the scrollbar thumb */
+.listings-and-button-container::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px; 
+}
+
+/* Style the scrollbar track */
+.listings-and-button-container::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 5px;
+}
+
 
 .listing-grid-container {
   display: grid;
