@@ -216,4 +216,6 @@ header {
   background-color: var(--listing-card-btn-hover-bg);
 }
 
-
+.options-container {
+  background-color: var(--listing-card-pros-container-bg);
+}

@@ -1,0 +1,35 @@
+.filter-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: transparent;
+  border-radius: 10px;
+  border-color: lightgray;
+  gap: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.options-container {
+  position: absolute;
+  bottom: 10;
+  z-index: 999;
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  list-style-type: none;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.option:hover {
+  cursor: pointer;
+}

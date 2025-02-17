@@ -108,9 +108,9 @@ const mapBoxAccessToken = "pk.eyJ1IjoiZzRiZTM0IiwiYSI6ImNtNzJqMDU1YzBheXoyam9qMD
 function App() {
   const [listings, setListings] = useState<Listing[]>(testListings);
   const [isLoading, setIsLoading] = useState(false);
-  const [loadingCommand, setLoadingCommand] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [loadingMoreListings, setLoadingMoreListings] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState([]);
   const [pagingData, setPagingData] = useState({
     page: 0,
     count: 0,
@@ -190,7 +190,7 @@ function App() {
 
   return (
     <>
-      {loadingCommand && <div className='large-loader'></div>}
+      {isLoading && <div className='large-loader'></div>}
       {showModal && <RequestModal setShowModal={setShowModal} showToast={showToast} />}
       <header className='header'>
         <h1 className='header-title' onClick={() => window.location.reload()}>Finding Places</h1>
@@ -201,12 +201,18 @@ function App() {
           <div className='filters-container'>
             <form onSubmit={submitPreference} className='preferences-form'>
               <input className='preferences-input' type="text" name="preferences" placeholder='Search' />
-              <button type='submit' className='submit-button' disabled={isLoading || loadingCommand}>
+              <button type='submit' className='submit-button' disabled={isLoading}>
                 {isLoading ? <div className='loader'></div> : <CiPaperplane size={25} style={{ strokeWidth: 0.5}} />}
               </button>
             </form>
             {filterOptions.map((option, index) => (
-              <FilterOption key={index} label={option.label} options={option.options} />
+              <FilterOption
+                key={index}
+                label={option.label}
+                options={option.options}
+                selectedFilters={selectedFilters}
+                setSelectedFilters={setSelectedFilters}
+                />
             ))}
           </div>
           <div className='map-and-listings-container'>
