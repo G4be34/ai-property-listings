@@ -7,6 +7,9 @@ export type ListingRecord = {
   pet_friendly: boolean;
   url: string;
   image: string;
+  beds: number;
+  baths: number;
+  size: string;
 };
 
 export type Listing = {
@@ -17,6 +20,9 @@ export type Listing = {
   subImgs: string[];
   pros: string[];
   link: string;
+  beds: number;
+  baths: number;
+  size: string;
 };
 
 export function mapListings(records: ListingRecord[]): Listing[] {
@@ -32,7 +38,10 @@ export function mapListings(records: ListingRecord[]): Listing[] {
           mainImg: record.image,
           subImgs: [], // Assuming no sub-images are provided in the original record
           pros: pros,
-          link: record.url
+          link: record.url,
+          beds: record.beds,
+          baths: record.baths,
+          size: record.size
       };
   });
 };

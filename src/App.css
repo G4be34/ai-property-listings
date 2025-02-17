@@ -15,64 +15,8 @@
   cursor: pointer;
 }
 
-.title {
-  text-align: center;
-  font-size: 3.5rem;
-  max-width: 700px;
-  margin: 85px auto 65px auto;
-}
-
-.description-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  max-width: 700px;
-  margin: 40px auto 40px auto;
-}
-
-.description {
-  width: fit-content;
-  font-size: 1.1rem;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 5px;
-}
-
-.command-grid-container {
-  display: grid;
-  max-width: 700px;
-  margin: 60px auto 30px auto;
-  gap: 10px;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-}
-
-.command-container {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.command-container:hover {
-  cursor: pointer;
-}
-
-.command-icon {
-  display: flex;
-  width: fit-content;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 10px 5px;
-}
-
-.command {
-  text-align: left;
-  margin: 0 5px;
-}
-
 .preferences-form {
   display: flex;
-  margin: 45px auto 0 auto;
   max-width: 700px;
   width: 100%;
   align-items: center;
@@ -100,21 +44,6 @@
   cursor: pointer;
 }
 
-.powered-by-container {
-  display: flex;
-  max-width: 700px;
-  margin: 1px auto 20px auto;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 15px;
-  width: 100%;
-}
-
-.powered-by {
-  color: gray;
-  text-align: right;
-}
-
 .main-body-container {
   display: flex;
   flex-direction: column;
@@ -124,7 +53,10 @@
 
 .filters-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 10px;
+  padding-left: 15px;
   gap: 1rem;
   margin-bottom: 15px;
 }
@@ -134,11 +66,11 @@
   width: 100%;
   flex-grow: 1;
   border-top: 1px solid lightgray;
-  max-height: calc(100vh - 270px);
+  max-height: calc(100vh - 170px);
 }
 
 #map {
-  border: 1px solid red;
+  flex-grow: 1;
 }
 
 .listings-and-button-container {
@@ -153,7 +85,7 @@
 
 /* Custom scrollbar for listings-and-button-container */
 .listings-and-button-container::-webkit-scrollbar {
-  width: 10px; 
+  width: 10px;
 }
 
 /* Hide scrollbar up/down arrows */
@@ -164,7 +96,7 @@
 /* Style and round the scrollbar thumb */
 .listings-and-button-container::-webkit-scrollbar-thumb {
   background: gray;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 /* Style the scrollbar track */

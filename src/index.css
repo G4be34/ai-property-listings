@@ -175,20 +175,6 @@ header {
   border-bottom: 1px solid var(--header-border);
 }
 
-.description {
-  background-color: var(--description-bg);
-}
-
-.command-container {
-  background-color: var(--command-bg);
-  transition: background-color 0.3s ease;
-}
-
-.command-container:hover {
-  background-color: var(--command-hover-bg);
-  cursor: pointer;
-}
-
 .preferences-input {
   border: 2px solid var(--input-border);
 }
