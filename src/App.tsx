@@ -110,7 +110,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [loadingMoreListings, setLoadingMoreListings] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [pagingData, setPagingData] = useState({
     page: 0,
     count: 0,
