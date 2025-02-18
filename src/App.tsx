@@ -117,7 +117,6 @@ function App() {
   const [listings, setListings] = useState<Listing[]>(defaultListings);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [loadingMoreListings, setLoadingMoreListings] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [longitude, setLongitude] = useState(-118.26234);
   const [latitude, setLatitude] = useState(34.071907);
@@ -186,27 +185,16 @@ function App() {
     await search(preferences, 0)
   };
 
-  const loadMoreListings = async () => {
-    try {
-      setLoadingMoreListings(true);
-      await search(pagingData.searchText, pagingData.page+1);
-    } catch (error) {
-      console.error("Error loading more listings:", error);
-    } finally {
-      setLoadingMoreListings(false);
-    }
+  const backPage = async () => {
+    await search(pagingData.searchText, pagingData.page - 1);
   };
 
-  const backPage = () => {
-
+  const nextPage = async () => {
+    await search(pagingData.searchText, pagingData.page + 1);
   };
 
-  const nextPage = () => {
-
-  };
-
-  const filterListings = () => {
-
+  const filterListings = async () => {
+    await search(`${pagingData.searchText}, Filters: ${selectedFilters.join(', ')}`);
   };
 
 
@@ -236,6 +224,21 @@ function App() {
                 setSelectedFilters={setSelectedFilters}
                 />
             ))}
+            <div className='filter-button-container'>
+              <button
+                className='filter-btn'
+                onClick={filterListings}
+                disabled={isLoading || selectedFilters.length === 0}
+                >
+                  Filter
+                </button>
+              <button
+                className='filter-btn'
+                onClick={() => setSelectedFilters([])}
+                >
+                  Clear Filters
+                </button>
+            </div>
           </div>
           <div className='map-and-listings-container'>
             <Map
@@ -294,7 +297,7 @@ function App() {
                       alignSelf: 'center',
                     }}
                   >
-                    <FaArrowLeftLong size={20} cursor={"pointer"} />
+                    <FaArrowLeftLong size={20} cursor={"pointer"} onClick={backPage} />
                     <div style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -330,7 +333,7 @@ function App() {
                         </div>
                       ))}
                     </div>
-                    <FaArrowRightLong size={20} cursor={"pointer"} />
+                    <FaArrowRightLong size={20} cursor={"pointer"} onClick={nextPage} />
                   </div>
                 : null}
             </div>

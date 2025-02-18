@@ -44,6 +44,30 @@
   cursor: pointer;
 }
 
+.filter-button-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border-color: lightgray;
+  background-color: darkgray;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.filter-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .main-body-container {
   display: flex;
   flex-direction: column;
