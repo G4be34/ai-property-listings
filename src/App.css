@@ -44,6 +44,14 @@
   cursor: pointer;
 }
 
+.filter-options-container {
+  display: flex;
+  justify-content: center;
+  align-items: 'center';
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .filter-button-container {
   display: flex;
   gap: 2rem;
@@ -136,6 +144,19 @@
   flex-grow: 1;
 }
 
+.map-hover-button {
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  bottom: 5%;
+  right: 35%;
+  cursor: pointer;
+  gap: 1rem;
+  padding: 15px 30px;
+  border-radius: 10px;
+}
+
 .load-more-button {
   display: flex;
   max-width: fit-content;
@@ -206,5 +227,29 @@
 
   .preferences-form{
     padding: 2em;
+  }
+
+  .map-hover-button {
+    display: flex;
+  }
+
+  #map {
+    display: none;
+  }
+
+  .filter-button-container {
+    margin-top: 1rem;
+  }
+
+  .filters-container {
+    flex-direction: column;
+  }
+
+  .listings-and-button-container {
+    overflow: hidden;
+  }
+
+  .map-and-listings-container {
+    max-height: 100%;
   }
 }

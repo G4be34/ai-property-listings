@@ -2,6 +2,7 @@ import axios from 'axios';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useState } from 'react';
 import { CiPaperplane } from 'react-icons/ci';
+import { FaRegMap } from "react-icons/fa";
 import { FaArrowLeftLong, FaArrowRightLong, FaLocationPin } from "react-icons/fa6";
 import { Map, Marker, NavigationControl } from 'react-map-gl/mapbox';
 import { toast, ToastContainer } from 'react-toastify';
@@ -215,15 +216,17 @@ function App() {
                 {isLoading ? <div className='loader'></div> : <CiPaperplane size={25} style={{ strokeWidth: 0.5}} />}
               </button>
             </form>
-            {filterOptions.map((option, index) => (
-              <FilterOption
-                key={index}
-                label={option.label}
-                options={option.options}
-                selectedFilters={selectedFilters}
-                setSelectedFilters={setSelectedFilters}
-                />
-            ))}
+            <div className='filter-options-container'>
+              {filterOptions.map((option, index) => (
+                <FilterOption
+                  key={index}
+                  label={option.label}
+                  options={option.options}
+                  selectedFilters={selectedFilters}
+                  setSelectedFilters={setSelectedFilters}
+                  />
+              ))}
+            </div>
             <div className='filter-button-container'>
               <button
                 className='filter-btn'
@@ -249,6 +252,7 @@ function App() {
                 longitude: viewport.longitude,
                 zoom: viewport.zoom
               }}
+              id='map'
               style={{ width: "100%", height: "auto" }}
             >
               {listings.map((listing, index) => (
@@ -284,6 +288,9 @@ function App() {
                 {listings.map((listing, index) => (
                   <ListingCard key={index} listing={listing} setShowModal={setShowModal} />
                 ))}
+                <div className='map-hover-button'>
+                  Map <FaRegMap size={20} />
+                </div>
               </div>
               {pagingData.totalPages > 1
                 ? <div
@@ -317,6 +324,11 @@ function App() {
                             cursor: 'pointer',
                             position: 'relative',
                             padding: '0.5rem 0.75rem',
+                          }}
+                          onClick={() => {
+                            if (pagingData.page !== index) {
+                              search(pagingData.searchText, index);
+                            }
                           }}
                         >
                           {`${index + 1}`}

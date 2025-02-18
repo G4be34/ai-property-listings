@@ -31,6 +31,7 @@ body {
   --listing-card-btn-hover-bg: gray;
   --modal-bg: #f5f5f5;
   --modal-button-bg: black;
+  --map-hover-button-bg: lightgray;
 }
 
 /* Dark mode colors */
@@ -52,6 +53,7 @@ body {
   --listing-card-btn-hover-bg: gray;
   --modal-bg: #333;
   --modal-button-bg: gray;
+  --map-hover-button-bg: rgb(118, 118, 118);
 }
 
 body {
@@ -214,6 +216,10 @@ header {
 
 .listing-card-button:hover {
   background-color: var(--listing-card-btn-hover-bg);
+}
+
+.map-hover-button {
+  background-color: var(--map-hover-button-bg);
 }
 
 .options-container {
