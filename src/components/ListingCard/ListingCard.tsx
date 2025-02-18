@@ -13,7 +13,7 @@ export function ListingCard({ listing, setShowModal }: { listing: Listing, setSh
         <img src={listing.mainImg} alt={listing.title} />
       </div>
       <div className="listing-card-pros-container">
-        <h2 className="listing-card-price">{listing.price}</h2>
+        <h2 className="listing-card-price">{listing.price}/mo</h2>
         <small>Beds: {listing.beds} | Baths: {listing.baths} | {listing.size}</small>
         <small className="listing-card-address">{listing.title} | {listing.address}</small>
         <button className="listing-card-button" type="button" onClick={() => setShowModal(true)}>I want this checked out</button>

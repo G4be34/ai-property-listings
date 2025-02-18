@@ -69,15 +69,12 @@
   max-height: calc(100vh - 170px);
 }
 
-#map {
-  flex-grow: 1;
-}
-
 .listings-and-button-container {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   flex-grow: 1;
+  width: 70%;
   border-left: 1px solid lightgray;
   max-height: 100%;
   padding-top: 15px;

@@ -1,7 +1,9 @@
 import axios from 'axios';
-import mapboxgl from 'mapbox-gl';
-import { useEffect, useState } from 'react';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { useState } from 'react';
 import { CiPaperplane } from 'react-icons/ci';
+import { FaLocationPin } from "react-icons/fa6";
+import { Map, Marker, NavigationControl } from 'react-map-gl/mapbox';
 import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
 import { FilterOption } from './components/filterOption/FilterOption';
@@ -40,10 +42,11 @@ const testListings = [
     title: "Listing in Los Angeles",
     link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
     mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00/month",
+    price: "$1875.00",
     beds: 2,
     baths: 2,
     size: "1,000 sqft",
+    coordinates: [-74.5, 40],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
@@ -51,10 +54,11 @@ const testListings = [
     title: "Listing in Los Angeles",
     link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
     mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00/month",
+    price: "$1875.00",
     beds: 2,
     baths: 2,
     size: "1,000 sqft",
+    coordinates: [-75.5, 41],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
@@ -62,10 +66,11 @@ const testListings = [
     title: "Listing in Los Angeles",
     link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
     mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00/month",
+    price: "$1875.00",
     beds: 2,
     baths: 2,
     size: "1,000 sqft",
+    coordinates: [-76.5, 42],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
@@ -73,10 +78,11 @@ const testListings = [
     title: "Listing in Los Angeles",
     link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
     mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00/month",
+    price: "$1875.00",
     beds: 2,
     baths: 2,
     size: "1,000 sqft",
+    coordinates: [-77.5, 43],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
@@ -84,10 +90,11 @@ const testListings = [
     title: "Listing in Los Angeles",
     link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
     mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00/month",
+    price: "$1875.00",
     beds: 2,
     baths: 2,
     size: "1,000 sqft",
+    coordinates: [-78.5, 44],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
@@ -95,10 +102,11 @@ const testListings = [
     title: "Listing in Los Angeles",
     link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
     mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00/month",
+    price: "$1875.00",
     beds: 2,
     baths: 2,
     size: "1,000 sqft",
+    coordinates: [-79.5, 45],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
 ];
@@ -116,6 +124,11 @@ function App() {
     count: 0,
     totalPages: 1,
     searchText: ''
+  });
+  const [viewport, setViewport] = useState({
+    latitude: 40,
+    longitude: -74.5,
+    zoom: 9
   });
 
   const showToast = (toastType: 'success' | 'error') => {
@@ -175,19 +188,6 @@ function App() {
   };
 
 
-  useEffect(() => {
-    mapboxgl.accessToken = mapBoxAccessToken;
-
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-74.5, 40],
-      zoom: 9,
-    });
-
-    map.on("load", () => {window.dispatchEvent(new Event("resize"));});
-  }, []);
-
   return (
     <>
       {isLoading && <div className='large-loader'></div>}
@@ -216,7 +216,43 @@ function App() {
             ))}
           </div>
           <div className='map-and-listings-container'>
-            <div id='map'></div>
+            <Map
+              mapboxAccessToken={mapBoxAccessToken}
+              mapStyle={"mapbox://styles/mapbox/streets-v12"}
+              initialViewState={{
+                latitude: viewport.latitude,
+                longitude: viewport.longitude,
+                zoom: viewport.zoom
+              }}
+              style={{ width: "100%", height: "auto" }}
+            >
+              {listings.map((listing, index) => (
+                <Marker
+                  key={index}
+                  latitude={listing.coordinates[1]}
+                  longitude={listing.coordinates[0]}
+                >
+                  <div style={{ position: "relative" }}>
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "-30%",
+                        left: "-50%",
+                        color: "black",
+                        background: "white",
+                        borderRadius: "50%",
+                        padding: "5px 10px",
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                        backgroundColor: "#1BFFFF"
+                      }}
+                    >{listing.price}</div>
+                    <FaLocationPin size={30} color='#1BFFFF' />
+                  </div>
+                </Marker>
+              ))}
+              <NavigationControl position="top-right" />
+            </Map>
             <div className='listings-and-button-container'>
               <div className='listing-grid-container'>
                 {listings.map((listing, index) => (
