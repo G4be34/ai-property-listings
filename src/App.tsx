@@ -36,100 +36,100 @@ const filterOptions = [
   }
 ]
 
-const testListings = [
+const defaultListings = [
   {
-    address: "7010 Sepulveda Blvd, Van Nuys, CA",
-    title: "Listing in Los Angeles",
-    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
-    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00",
+    address: "627 Belmont Ave #6, Los Angeles, CA 90026",
+    title: "Belmont Apartments",
+    link: "https://www.zillow.com/b/belmont-apartments-los-angeles-ca-9MLcY6/",
+    mainImg: "https://photos.zillowstatic.com/fp/c078b065e5795fe5558af6dd9504402c-p_e.jpg",
+    price: "$2967",
     beds: 2,
-    baths: 2,
-    size: "1,000 sqft",
-    coordinates: [-74.5, 40],
+    baths: 1,
+    size: "875 sqft",
+    coordinates: [-118.26234, 34.071907],
+    pros: ["Air conditioning", "Pet-friendly"],
+  },
+  {
+    address: "1232 S La Jolla Ave #1236, Los Angeles, CA 90035",
+    title: "1232 S. La Jolla",
+    link: "https://www.zillow.com/b/1232-s.-la-jolla-los-angeles-ca-5Xn9Yd/",
+    mainImg: "https://photos.zillowstatic.com/fp/2d06c9b8ada52c277ca3832e0248a2d5-p_e.jpg",
+    price: "$2450",
+    beds: 1,
+    baths: 1,
+    size: "950 sqft",
+    coordinates: [-118.37344, 34.053967],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
-    address: "7010 Sepulveda Blvd, Van Nuys, CA",
-    title: "Listing in Los Angeles",
-    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
-    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00",
+    address: "3432 Mentone Ave #5, Los Angeles, CA 90034",
+    title: "3432 Mentone Ave #5",
+    link: "https://www.zillow.com/homedetails/3432-Mentone-Ave-5-Los-Angeles-CA-90034/2069596364_zpid/",
+    mainImg: "https://photos.zillowstatic.com/fp/e19fc9be2dd6fd26a56115c55e75d6fe-p_e.jpg",
+    price: "$2795",
     beds: 2,
-    baths: 2,
-    size: "1,000 sqft",
-    coordinates: [-75.5, 41],
+    baths: 1,
+    size: "850 sqft",
+    coordinates: [-118.40978, 34.026585],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
-    address: "7010 Sepulveda Blvd, Van Nuys, CA",
-    title: "Listing in Los Angeles",
-    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
-    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00",
-    beds: 2,
-    baths: 2,
-    size: "1,000 sqft",
-    coordinates: [-76.5, 42],
+    address: "5731 1/2 Klump Ave, North Hollywood, CA 91601",
+    title: "5731 1/2 Klump Ave",
+    link: "https://www.zillow.com/homedetails/5731-1-2-Klump-Ave-North-Hollywood-CA-91601/447309322_zpid/",
+    mainImg: "https://photos.zillowstatic.com/fp/32ab0a675b4a807916e31235dbb98d8d-p_e.jpg",
+    price: "$3700",
+    beds: 3,
+    baths: 3,
+    size: "1,300 sqft",
+    coordinates: [-118.37574, 34.161892],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
-    address: "7010 Sepulveda Blvd, Van Nuys, CA",
-    title: "Listing in Los Angeles",
-    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
-    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00",
+    address: "11938 Goshen Ave APT 6, Los Angeles, CA 90049",
+    title: "Primetime Brentwood",
+    link: "https://www.zillow.com/b/primetime-brentwood-los-angeles-ca-5XmYhz/",
+    mainImg: "https://photos.zillowstatic.com/fp/fa1d2462434ffbf8d2e9d64c7c3c2c10-p_e.jpg",
+    price: "$3295",
     beds: 2,
     baths: 2,
-    size: "1,000 sqft",
-    coordinates: [-77.5, 43],
+    size: "950 sqft",
+    coordinates: [-118.46554, 34.04678],
     pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
-    address: "7010 Sepulveda Blvd, Van Nuys, CA",
-    title: "Listing in Los Angeles",
-    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
-    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00",
-    beds: 2,
-    baths: 2,
-    size: "1,000 sqft",
-    coordinates: [-78.5, 44],
+    address: "2901 S Sepulveda Blvd APT 261, Los Angeles, CA 90064",
+    title: "Westwood Villa",
+    link: "https://www.zillow.com/apartments/los-angeles-ca/westwood-villa/5XjPxS/",
+    mainImg: "https://photos.zillowstatic.com/fp/3b328c704243e2b68eec269dfc1da161-p_e.jpg",
+    price: "$2450",
+    beds: 1,
+    baths: 1,
+    size: "550-700 sqft",
+    coordinates: [-118.42976, 34.028744],
     pros: ["Washer/Dryer included", "Pet-friendly"],
-  },
-  {
-    address: "7010 Sepulveda Blvd, Van Nuys, CA",
-    title: "Listing in Los Angeles",
-    link: "https://www.zillow.com/apartments/van-nuys-ca/park-manor-apartments/5XjQsB/",
-    mainImg: "https://photos.zillowstatic.com/fp/49e4629a03a96c97daa9d1846e86b27d-p_e.jpg",
-    price: "$1875.00",
-    beds: 2,
-    baths: 2,
-    size: "1,000 sqft",
-    coordinates: [-79.5, 45],
-    pros: ["Washer/Dryer included", "Pet-friendly"],
-  },
+  }
 ];
 
 const mapBoxAccessToken = "pk.eyJ1IjoiZzRiZTM0IiwiYSI6ImNtNzJqMDU1YzBheXoyam9qMDQ3Nms2Z2wifQ.DqP8i3w9oQJ75-P4UIuyDg";
 
 function App() {
-  const [listings, setListings] = useState<Listing[]>(testListings);
+  const [listings, setListings] = useState<Listing[]>(defaultListings);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [loadingMoreListings, setLoadingMoreListings] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [longitude, setLongitude] = useState(-74.5);
-  const [latitude, setLatitude] = useState(40);
+  const [longitude, setLongitude] = useState(-118.26234);
+  const [latitude, setLatitude] = useState(34.071907);
   const [pagingData, setPagingData] = useState({
     page: 0,
     count: 0,
-    totalPages: 4,
+    totalPages: 1,
     searchText: ''
   });
   const [viewport, setViewport] = useState({
-    latitude: 40,
-    longitude: -74.5,
+    latitude: 34.071907,
+    longitude: -118.26234,
     zoom: 9
   });
 
@@ -195,6 +195,18 @@ function App() {
     } finally {
       setLoadingMoreListings(false);
     }
+  };
+
+  const backPage = () => {
+
+  };
+
+  const nextPage = () => {
+
+  };
+
+  const filterListings = () => {
+
   };
 
 
