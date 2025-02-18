@@ -124,7 +124,7 @@ function App() {
   const [pagingData, setPagingData] = useState({
     page: 0,
     count: 0,
-    totalPages: 1,
+    totalPages: 2,
     searchText: ''
   });
   const [viewport, setViewport] = useState({
@@ -293,38 +293,13 @@ function App() {
                 </div>
               </div>
               {pagingData.totalPages > 1
-                ? <div
-                    style={{
-                      display: 'flex',
-                      marginBottom: '1rem',
-                      marginTop: '1rem',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      width: '90%',
-                      alignSelf: 'center',
-                    }}
-                  >
+                ? <div className='pagination-container'>
                     <FaArrowLeftLong size={20} cursor={"pointer"} onClick={backPage} />
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '1.5rem'
-                    }}>
+                    <div className='pagination-numbers-container'>
                       {[...Array(pagingData.totalPages)].map((_, index) => (
                         <div
                           key={index}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: 'white',
-                            fontSize: '20px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            position: 'relative',
-                            padding: '0.5rem 0.75rem',
-                          }}
+                          className='pagination-button'
                           onClick={() => {
                             if (pagingData.page !== index) {
                               search(pagingData.searchText, index);
@@ -333,13 +308,7 @@ function App() {
                         >
                           {`${index + 1}`}
                           {pagingData.page === index && (
-                              <div style={{
-                                position: 'absolute',
-                                width: '100%',
-                                height: '100%',
-                                borderRadius: '50%',
-                                border: '2px solid white'
-                              }}></div>
+                              <div className='current-page-circle'></div>
                             )
                           }
                         </div>
