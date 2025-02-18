@@ -23,6 +23,7 @@ export type Listing = {
   beds: number;
   baths: number;
   size: string;
+  coordinates: number[];
 };
 
 export function mapListings(records: ListingRecord[]): Listing[] {

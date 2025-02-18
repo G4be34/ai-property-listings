@@ -2,7 +2,7 @@ import axios from 'axios';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useState } from 'react';
 import { CiPaperplane } from 'react-icons/ci';
-import { FaLocationPin } from "react-icons/fa6";
+import { FaArrowLeftLong, FaArrowRightLong, FaLocationPin } from "react-icons/fa6";
 import { Map, Marker, NavigationControl } from 'react-map-gl/mapbox';
 import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
@@ -119,10 +119,12 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [loadingMoreListings, setLoadingMoreListings] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [longitude, setLongitude] = useState(-74.5);
+  const [latitude, setLatitude] = useState(40);
   const [pagingData, setPagingData] = useState({
     page: 0,
     count: 0,
-    totalPages: 1,
+    totalPages: 4,
     searchText: ''
   });
   const [viewport, setViewport] = useState({
@@ -154,11 +156,19 @@ function App() {
       if(page===0) setListings(found)
       else setListings([...listings, ...found])
       setPagingData({
-        page: 0,
+        page: res.data.page,
         totalPages: res.data.totalPages,
         count: res.data.count,
         searchText: searchText
-      })
+      });
+
+      setLongitude(found[0].coordinates[0]);
+      setLatitude(found[0].coordinates[1]);
+      setViewport({
+        latitude: found[0].coordinates[1],
+        longitude: found[0].coordinates[0],
+        zoom: 9
+      });
 
     } catch (error) {
       console.log("Error submitting preferences:", error);
@@ -246,6 +256,7 @@ function App() {
                         cursor: "pointer",
                         backgroundColor: "#1BFFFF"
                       }}
+                      onClick={() => window.open(listing.link, "_blank")}
                     >{listing.price}</div>
                     <FaLocationPin size={30} color='#1BFFFF' />
                   </div>
@@ -259,10 +270,56 @@ function App() {
                   <ListingCard key={index} listing={listing} setShowModal={setShowModal} />
                 ))}
               </div>
-              {pagingData.page < pagingData.totalPages
-                ? <button className='load-more-button' onClick={loadMoreListings}>
-                    {loadingMoreListings ? <div className='loader'></div> : "Load More"}
-                  </button>
+              {pagingData.totalPages > 1
+                ? <div
+                    style={{
+                      display: 'flex',
+                      marginBottom: '1rem',
+                      marginTop: '1rem',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      width: '90%',
+                      alignSelf: 'center',
+                    }}
+                  >
+                    <FaArrowLeftLong size={20} cursor={"pointer"} />
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '1.5rem'
+                    }}>
+                      {[...Array(pagingData.totalPages)].map((_, index) => (
+                        <div
+                          key={index}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'white',
+                            fontSize: '20px',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            position: 'relative',
+                            padding: '0.5rem 0.75rem',
+                          }}
+                        >
+                          {`${index + 1}`}
+                          {pagingData.page === index && (
+                              <div style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: '100%',
+                                borderRadius: '50%',
+                                border: '2px solid white'
+                              }}></div>
+                            )
+                          }
+                        </div>
+                      ))}
+                    </div>
+                    <FaArrowRightLong size={20} cursor={"pointer"} />
+                  </div>
                 : null}
             </div>
           </div>
