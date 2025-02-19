@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AnimatePresence, motion } from 'framer-motion';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useState } from 'react';
 import { CiPaperplane } from 'react-icons/ci';
@@ -121,10 +122,11 @@ function App() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [longitude, setLongitude] = useState(-118.26234);
   const [latitude, setLatitude] = useState(34.071907);
+  const [isMapOpen, setIsMapOpen] = useState(false);
   const [pagingData, setPagingData] = useState({
     page: 0,
     count: 0,
-    totalPages: 2,
+    totalPages: 1,
     searchText: ''
   });
   const [viewport, setViewport] = useState({
@@ -183,7 +185,7 @@ function App() {
     const formData = new FormData(e.currentTarget);
     const preferences = formData.get('preferences') as string;
 
-    await search(preferences, 0)
+    await search(`${preferences}, Filters: ${selectedFilters.length > 0 ? selectedFilters.join(', ') : 'None'}`, 0)
   };
 
   const backPage = async () => {
@@ -203,6 +205,56 @@ function App() {
     <>
       {isLoading && <div className='large-loader'></div>}
       {showModal && <RequestModal setShowModal={setShowModal} showToast={showToast} />}
+      <AnimatePresence>
+        {isMapOpen &&
+          <motion.div
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ duration: 0.5 }}
+            style={{ width: "100%", height: "100vh", position: "absolute", top: 0, left: 0, zIndex: 1 }}
+          >
+            <Map
+              mapboxAccessToken={mapBoxAccessToken}
+              mapStyle={"mapbox://styles/mapbox/streets-v12"}
+              initialViewState={{
+                latitude: viewport.latitude,
+                longitude: viewport.longitude,
+                zoom: viewport.zoom
+              }}
+              style={{ width: "100%", height: "100vh", position: "absolute", top: 0, left: 0, zIndex: 1 }}
+            >
+              {listings.map((listing, index) => (
+                <Marker
+                  key={index}
+                  latitude={listing.coordinates[1]}
+                  longitude={listing.coordinates[0]}
+                >
+                  <div style={{ position: "relative" }}>
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "-30%",
+                        left: "-50%",
+                        color: "black",
+                        background: "white",
+                        borderRadius: "50%",
+                        padding: "5px 10px",
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                        backgroundColor: "#1BFFFF"
+                      }}
+                      onClick={() => window.open(listing.link, "_blank")}
+                    >{listing.price}</div>
+                    <FaLocationPin size={30} color='#1BFFFF' />
+                  </div>
+                </Marker>
+              ))}
+              <NavigationControl position="top-right" />
+            </Map>
+          </motion.div>
+        }
+      </AnimatePresence>
       <header className='header'>
         <h1 className='header-title' onClick={() => window.location.reload()}>Finding Places</h1>
         <ThemeToggle />
@@ -288,8 +340,12 @@ function App() {
                 {listings.map((listing, index) => (
                   <ListingCard key={index} listing={listing} setShowModal={setShowModal} />
                 ))}
-                <div className='map-hover-button'>
-                  Map <FaRegMap size={20} />
+                <div className='map-hover-button' onClick={() => {
+                  setIsMapOpen(!isMapOpen);
+                  document.body.classList.toggle('map-open', !isMapOpen);
+                }}>
+                  {isMapOpen ? "Close" : <>Map <FaRegMap size={20} /></>}
+
                 </div>
               </div>
               {pagingData.totalPages > 1

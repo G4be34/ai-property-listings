@@ -4,6 +4,10 @@
   min-height: 100vh;
 }
 
+.map-open {
+  overflow: hidden;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -266,6 +270,7 @@
 
   .map-hover-button {
     display: flex;
+    z-index: 20;
   }
 
   #map {
