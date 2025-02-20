@@ -148,18 +148,6 @@
   border-radius: 5px;
 }
 
-.sort-button {
-  display: flex;
-  align-items: center;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  gap: 0.5rem;
-  align-self: flex-end;
-  margin-right: 1rem;
-  font-weight: bold;
-}
-
 .listing-grid-container {
   display: grid;
   align-self: center;

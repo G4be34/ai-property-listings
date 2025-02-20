@@ -226,6 +226,10 @@ header {
   background-color: var(--listing-card-pros-container-bg);
 }
 
+.sort-options {
+  background-color: var(--listing-card-pros-container-bg);
+}
+
 .current-page-circle {
   border: 2px solid var(--text-color);
 }

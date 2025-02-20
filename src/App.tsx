@@ -5,13 +5,13 @@ import { useState } from 'react';
 import { CiPaperplane } from 'react-icons/ci';
 import { FaRegMap } from "react-icons/fa";
 import { FaArrowLeftLong, FaArrowRightLong, FaLocationPin } from "react-icons/fa6";
-import { IoIosArrowDown } from 'react-icons/io';
 import { Map, Marker, NavigationControl } from 'react-map-gl/mapbox';
 import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
 import { FilterOption } from './components/filterOption/FilterOption';
 import { ListingCard } from './components/ListingCard/ListingCard';
 import RequestModal from './components/RequestModal/RequestModal';
+import { SortButton } from './components/SortButton/SortButton';
 import ThemeToggle from './components/ThemeToggle';
 import { Listing, ListingRecord, mapListings } from './utils';
 
@@ -110,14 +110,6 @@ const defaultListings = [
   }
 ];
 
-const sortOptions = [
-  "Price: (High to Low)",
-  "Price: (Low to High)",
-  "Bedrooms",
-  "Bathrooms",
-  "Square Feet"
-]
-
 const mapBoxAccessToken = "pk.eyJ1IjoiZzRiZTM0IiwiYSI6ImNtNzJqMDU1YzBheXoyam9qMDQ3Nms2Z2wifQ.DqP8i3w9oQJ75-P4UIuyDg";
 
 function App() {
@@ -125,7 +117,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [isSortOpen, setIsSortOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState<string>('');
   const [longitude, setLongitude] = useState(-118.26234);
   const [latitude, setLatitude] = useState(34.071907);
@@ -205,6 +196,10 @@ function App() {
 
   const filterListings = async () => {
     await search(`${pagingData.searchText}, Filters: ${selectedFilters.join(', ')}`);
+  };
+
+  const sortListings = async (option: string) => {
+    await search(`${pagingData.searchText}, Sort: ${selectedSort}`);
   };
 
 
@@ -344,12 +339,11 @@ function App() {
               <NavigationControl position="top-right" />
             </Map>
             <div className='listings-and-button-container'>
-              <button
-                className='sort-button'
-                onClick={() => setIsSortOpen(!isSortOpen)}
-              >
-                Sort{selectedSort ? ": " + selectedSort : null}<IoIosArrowDown size={20} />
-              </button>
+              <SortButton
+                selectedSort={selectedSort}
+                setSelectedSort={setSelectedSort}
+                sortListings={sortListings}
+                />
               <div className='listing-grid-container'>
                 {listings.map((listing, index) => (
                   <ListingCard key={index} listing={listing} setShowModal={setShowModal} />
