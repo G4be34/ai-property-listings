@@ -110,7 +110,7 @@ const defaultListings = [
   }
 ];
 
-const mapBoxAccessToken = "pk.eyJ1IjoiZzRiZTM0IiwiYSI6ImNtNzJqMDU1YzBheXoyam9qMDQ3Nms2Z2wifQ.DqP8i3w9oQJ75-P4UIuyDg";
+const mapBoxAccessToken = import.meta.env.VITE_MAPBOX_API_TOKEN;
 
 function App() {
   const [listings, setListings] = useState<Listing[]>(defaultListings);
@@ -199,7 +199,7 @@ function App() {
   };
 
   const sortListings = async (option: string) => {
-    await search(`${pagingData.searchText}, Sort: ${selectedSort}`);
+    await search(`${pagingData.searchText}, Sort: ${option}`);
   };
 
 
@@ -359,23 +359,51 @@ function App() {
                 ? <div className='pagination-container'>
                     <FaArrowLeftLong size={20} cursor={"pointer"} onClick={backPage} />
                     <div className='pagination-numbers-container'>
-                      {[...Array(pagingData.totalPages)].map((_, index) => (
-                        <div
-                          key={index}
-                          className='pagination-button'
-                          onClick={() => {
-                            if (pagingData.page !== index) {
-                              search(pagingData.searchText, index);
-                            }
-                          }}
-                        >
-                          {`${index + 1}`}
-                          {pagingData.page === index && (
-                              <div className='current-page-circle'></div>
-                            )
+                      {(() => {
+                          const pageNumbers = [];
+                          const totalPages = pagingData.totalPages;
+                          const currentPage = pagingData.page;
+
+                          // Calculate start and end pages for the window of 7 numbers
+                          let start = Math.max(0, currentPage - 3);
+                          let end = Math.min(totalPages - 1, currentPage + 3);
+
+                          if (currentPage < 4) {
+                            start = 0;
+                            end = Math.min(6, totalPages - 1); // Ensure we don't exceed the total number of pages
                           }
-                        </div>
-                      ))}
+
+                          // Adjust if we're near the end of the pagination
+                          if (totalPages <= 7) {
+                            start = 0;
+                            end = totalPages - 1;
+                          } else if (currentPage >= totalPages - 4) {
+                            start = totalPages - 7;
+                            end = totalPages - 1;
+                          }
+
+                          // Populate the page numbers to show
+                          for (let i = start; i <= end; i++) {
+                            pageNumbers.push(i);
+                          }
+
+                          return pageNumbers.map((index) => (
+                            <div
+                              key={index}
+                              className="pagination-button"
+                              onClick={() => {
+                                if (pagingData.page !== index) {
+                                  search(pagingData.searchText, index);
+                                }
+                              }}
+                            >
+                              {`${index + 1}`}
+                              {pagingData.page === index && (
+                                <div className="current-page-circle"></div>
+                              )}
+                            </div>
+                          ));
+                        })()}
                     </div>
                     <FaArrowRightLong size={20} cursor={"pointer"} onClick={nextPage} />
                   </div>
