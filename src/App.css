@@ -64,6 +64,16 @@
   margin-right: auto;
 }
 
+.new-property-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: transparent;
+  border-radius: 10px;
+  border-color: lightgray;
+  cursor: pointer;
+}
+
 .filter-btn {
   display: flex;
   align-items: center;
@@ -113,7 +123,7 @@
   width: 70%;
   border-left: 1px solid lightgray;
   max-height: 100%;
-  padding-top: 15px;
+  padding-top: 10px;
 }
 
 /* Custom scrollbar for listings-and-button-container */
@@ -138,13 +148,23 @@
   border-radius: 5px;
 }
 
+.sort-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  gap: 0.5rem;
+  align-self: flex-end;
+  margin-right: 1rem;
+  font-weight: bold;
+}
 
 .listing-grid-container {
   display: grid;
-  margin: 0 auto;
+  align-self: center;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  max-width: 90%;
+  max-width: 100%;
   flex-grow: 1;
 }
 

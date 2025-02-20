@@ -16,7 +16,7 @@ export function ListingCard({ listing, setShowModal }: { listing: Listing, setSh
         <h2 className="listing-card-price">{listing.price}/mo</h2>
         <small>Beds: {listing.beds} | Baths: {listing.baths} | {listing.size}</small>
         <small className="listing-card-address">{listing.title} | {listing.address}</small>
-        <button className="listing-card-button" type="button" onClick={() => setShowModal(true)}>I want this checked out</button>
+        <button className="listing-card-button" type="button" onClick={() => setShowModal(true)}>Send someone to visit</button>
       </div>
     </motion.div>
   )

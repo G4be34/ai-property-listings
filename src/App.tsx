@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CiPaperplane } from 'react-icons/ci';
 import { FaRegMap } from "react-icons/fa";
 import { FaArrowLeftLong, FaArrowRightLong, FaLocationPin } from "react-icons/fa6";
+import { IoIosArrowDown } from 'react-icons/io';
 import { Map, Marker, NavigationControl } from 'react-map-gl/mapbox';
 import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
@@ -31,10 +32,6 @@ const filterOptions = [
   {
     label: "Amenities",
     options: ["Pet Friendly", "Washer and Dryer", "One Site Parking", "Furnished"]
-  },
-  {
-    label: "Style",
-    options: ["Traditional", "Modern", "Spanish/Mediterranean", "Luxury"]
   }
 ]
 
@@ -113,6 +110,14 @@ const defaultListings = [
   }
 ];
 
+const sortOptions = [
+  "Price: (High to Low)",
+  "Price: (Low to High)",
+  "Bedrooms",
+  "Bathrooms",
+  "Square Feet"
+]
+
 const mapBoxAccessToken = "pk.eyJ1IjoiZzRiZTM0IiwiYSI6ImNtNzJqMDU1YzBheXoyam9qMDQ3Nms2Z2wifQ.DqP8i3w9oQJ75-P4UIuyDg";
 
 function App() {
@@ -120,6 +125,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [selectedSort, setSelectedSort] = useState<string>('');
   const [longitude, setLongitude] = useState(-118.26234);
   const [latitude, setLatitude] = useState(34.071907);
   const [isMapOpen, setIsMapOpen] = useState(false);
@@ -147,7 +154,7 @@ function App() {
     }
   };
 
-  const search = async (searchText:string, page=0, pageSize=6) =>{
+  const search = async (searchText:string, page=0, pageSize=10) =>{
     try {
       setIsLoading(true);
       // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
@@ -256,7 +263,7 @@ function App() {
         }
       </AnimatePresence>
       <header className='header'>
-        <h1 className='header-title' onClick={() => window.location.reload()}>Finding Places</h1>
+        <h1 className='header-title' onClick={() => window.location.reload()}>We visit properties for you</h1>
         <ThemeToggle />
       </header>
       <div>
@@ -278,6 +285,7 @@ function App() {
                   setSelectedFilters={setSelectedFilters}
                   />
               ))}
+              <button className='new-property-button' onClick={() => setShowModal(true)}>Send us to visit any property online</button>
             </div>
             <div className='filter-button-container'>
               <button
@@ -336,6 +344,12 @@ function App() {
               <NavigationControl position="top-right" />
             </Map>
             <div className='listings-and-button-container'>
+              <button
+                className='sort-button'
+                onClick={() => setIsSortOpen(!isSortOpen)}
+              >
+                Sort{selectedSort ? ": " + selectedSort : null}<IoIosArrowDown size={20} />
+              </button>
               <div className='listing-grid-container'>
                 {listings.map((listing, index) => (
                   <ListingCard key={index} listing={listing} setShowModal={setShowModal} />
@@ -345,7 +359,6 @@ function App() {
                   document.body.classList.toggle('map-open', !isMapOpen);
                 }}>
                   {isMapOpen ? "Close" : <>Map <FaRegMap size={20} /></>}
-
                 </div>
               </div>
               {pagingData.totalPages > 1
