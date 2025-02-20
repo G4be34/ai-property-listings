@@ -214,7 +214,7 @@ function App() {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.5 }}
-            style={{ width: "100%", height: "100vh", position: "absolute", top: 0, left: 0, zIndex: 1 }}
+            style={{ width: "100%", height: "auto", position: "fixed", top: 0, left: 0, bottom: 0, zIndex: 1 }}
           >
             <Map
               mapboxAccessToken={mapBoxAccessToken}
