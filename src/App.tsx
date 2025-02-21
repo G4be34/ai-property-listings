@@ -46,7 +46,6 @@ const defaultListings = [
     baths: 1,
     size: "875 sqft",
     coordinates: [-118.26234, 34.071907],
-    pros: ["Air conditioning", "Pet-friendly"],
   },
   {
     address: "1232 S La Jolla Ave #1236, Los Angeles, CA 90035",
@@ -58,7 +57,6 @@ const defaultListings = [
     baths: 1,
     size: "950 sqft",
     coordinates: [-118.37344, 34.053967],
-    pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
     address: "3432 Mentone Ave #5, Los Angeles, CA 90034",
@@ -70,7 +68,6 @@ const defaultListings = [
     baths: 1,
     size: "850 sqft",
     coordinates: [-118.40978, 34.026585],
-    pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
     address: "5731 1/2 Klump Ave, North Hollywood, CA 91601",
@@ -82,7 +79,6 @@ const defaultListings = [
     baths: 3,
     size: "1,300 sqft",
     coordinates: [-118.37574, 34.161892],
-    pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
     address: "11938 Goshen Ave APT 6, Los Angeles, CA 90049",
@@ -94,7 +90,6 @@ const defaultListings = [
     baths: 2,
     size: "950 sqft",
     coordinates: [-118.46554, 34.04678],
-    pros: ["Washer/Dryer included", "Pet-friendly"],
   },
   {
     address: "2901 S Sepulveda Blvd APT 261, Los Angeles, CA 90064",
@@ -106,7 +101,50 @@ const defaultListings = [
     baths: 1,
     size: "550-700 sqft",
     coordinates: [-118.42976, 34.028744],
-    pros: ["Washer/Dryer included", "Pet-friendly"],
+  },
+  {
+    address: "17806 Lassen St, Northridge, CA 91325",
+    title: "Valleywood Apartments",
+    link: "https://www.zillow.com/apartments/northridge-ca/valleywood-apartments/5j3nVB/",
+    mainImg: "https://photos.zillowstatic.com/fp/22235decc9972e4df6e569ad159f866f-p_e.jpg",
+    price: "$2850",
+    beds: 2,
+    baths: 2,
+    size: "945 sqft",
+    coordinates: [-118.52182, 34.24972],
+  },
+  {
+    address: "1141 1/2 S Swall Dr, Los Angeles, CA 90035",
+    title: "1141 1/2 S Swall Dr",
+    link: "https://www.zillow.com/homedetails/1141-1-2-S-Swall-Dr-Los-Angeles-CA-90035/2056046373_zpid/",
+    mainImg: "https://photos.zillowstatic.com/fp/868e48a0ec25fc5134e37bb74816fa15-p_e.jpg",
+    price: "$2745",
+    beds: 1,
+    baths: 1,
+    size: "1,100 sqft",
+    coordinates: [-118.38582, 34.055946],
+  },
+  {
+    address: "2209 Clyde Ave #2209A, Los Angeles, CA 90016",
+    title: "2209 Clyde Ave #2209A",
+    link: "https://www.zillow.com/homedetails/2209-Clyde-Ave-2209A-Los-Angeles-CA-90016/447574360_zpid/",
+    mainImg: "https://photos.zillowstatic.com/fp/8e8cd9565de870b2726bbbcd274630e2-p_e.jpg",
+    price: "$2395",
+    beds: 1,
+    baths: 1,
+    size: "750 sqft",
+    coordinates: [-118.365395, 34.03776],
+  },
+  {
+    address: "924 W 78th St #926, Los Angeles, CA 90044",
+    title: "924 W 78th St #926",
+    link: "https://www.zillow.com/homedetails/924-W-78th-St-926-Los-Angeles-CA-90044/447574300_zpid/",
+    mainImg: "https://maps.googleapis.com/maps/api/streetview?location=924+W+78th+St%2C+Los+Angeles%2C+CA+90044&size=960x720&key=AIzaSyARFMLB1na-BBWf7_R3-5YOQQaHqEJf6RQ&source=outdoor&&signature=1D5FUrojMNp28vpsS2HjhNQRW58=",
+    price: "$3550",
+    beds: 3,
+    baths: 2,
+    size: "1281 sqft",
+    coordinates: [-118.29013, 33.968517],
   }
 ];
 
@@ -258,7 +296,7 @@ function App() {
         }
       </AnimatePresence>
       <header className='header'>
-        <h1 className='header-title' onClick={() => window.location.reload()}>We visit properties for you</h1>
+        <h1 className='header-title' onClick={() => window.location.reload()}>We Visit Properties For You</h1>
         <ThemeToggle />
       </header>
       <div>
