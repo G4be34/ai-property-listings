@@ -10,6 +10,48 @@
   position: relative;
 }
 
+.price-form {
+  position: absolute;
+  bottom: 10;
+  z-index: 999;
+  border-radius: 10px;
+  padding: 25px 25px 15px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-form button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  border-color: lightgray;
+}
+
+.price-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.price-range {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.price-range-separator {
+  display: flex;
+  align-items: center;
+}
+
+.price-range input {
+  width: 6rem;
+}
+
 .options-container {
   position: absolute;
   bottom: 10;

@@ -18,6 +18,10 @@ import { Listing, ListingRecord, mapListings } from './utils';
 
 const filterOptions = [
   {
+    label: "Price",
+    options: ["Min Price", "Max Price"],
+  },
+  {
     label: "Beds & Baths",
     options: ["testing", "testing2", "testing3"],
   },
@@ -232,7 +236,7 @@ function App() {
     await search(pagingData.searchText, pagingData.page + 1);
   };
 
-  const filterListings = async () => {
+  const filterListings = async (option: string) => {
     await search(`${pagingData.searchText}, Filters: ${selectedFilters.join(', ')}`);
   };
 
@@ -316,6 +320,7 @@ function App() {
                   options={option.options}
                   selectedFilters={selectedFilters}
                   setSelectedFilters={setSelectedFilters}
+                  filterListings={filterListings}
                   />
               ))}
               <button className='new-property-button' onClick={() => setShowModal(true)}>Send us to visit any property online</button>
@@ -323,14 +328,8 @@ function App() {
             <div className='filter-button-container'>
               <button
                 className='filter-btn'
-                onClick={filterListings}
-                disabled={isLoading || selectedFilters.length === 0}
-                >
-                  Filter
-                </button>
-              <button
-                className='filter-btn'
                 onClick={() => setSelectedFilters([])}
+                disabled={selectedFilters.length === 0 || isLoading}
                 >
                   Clear Filters
                 </button>
