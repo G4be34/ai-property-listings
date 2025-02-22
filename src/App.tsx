@@ -225,7 +225,7 @@ function App() {
     const formData = new FormData(e.currentTarget);
     const preferences = formData.get('preferences') as string;
 
-    await search(`${preferences}, Filters: ${selectedFilters.length > 0 ? selectedFilters.join(', ') : 'None'}`, 0)
+    await search(`${preferences}. Filters: [${selectedFilters.length > 0 ? selectedFilters : 'None'}], Sort by (${selectedSort ? selectedSort : 'None'})`, 0)
   };
 
   const backPage = async () => {
@@ -237,10 +237,26 @@ function App() {
   };
 
   const filterListings = async (option: string) => {
-    await search(`${pagingData.searchText}, Filters: ${selectedFilters.join(', ')}`);
+    if (pagingData.searchText.includes(option)) {
+      pagingData.searchText.replace(/\[([^\]]*)\]/, (match) => {
+        const insideBrackets = match.slice(1, -1); // Remove the square brackets
+        const updatedContent = insideBrackets.split(', ').filter(item => item !== option).join(', '); // Remove 'two'
+        return `[${updatedContent}]`;
+      });
+    } else {
+      pagingData.searchText.replace(/\[([^\]]*)\]/, (match) => {
+        const insideBrackets = match.slice(1, -1); // Remove the square brackets
+        const updatedContent = insideBrackets + ', ' + option; // Add new filter
+        return `[${updatedContent}]`;
+      });
+    }
+
+    await search(pagingData.searchText);
   };
 
   const sortListings = async (option: string) => {
+    pagingData.searchText = pagingData.searchText.replace(/\(([^)]*)\)/, `(${option})`);
+
     await search(`${pagingData.searchText}, Sort: ${option}`);
   };
 

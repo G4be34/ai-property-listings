@@ -49,6 +49,7 @@ export function FilterOption({ label, options, selectedFilters, setSelectedFilte
 
   const selectFilter = async (option: string) => {
     if (selectedFilters.includes(option)) {
+      await filterListings(option);
       setSelectedFilters(selectedFilters.filter((filter) => filter !== option));
     } else {
       await filterListings(option);
