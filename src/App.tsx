@@ -35,7 +35,7 @@ const filterOptions = [
   },
   {
     label: "Amenities",
-    options: ["Pet Friendly", "Washer and Dryer", "One Site Parking", "Furnished"]
+    options: ["Pet Friendly", "Washer and Dryer", "On Site Parking", "Furnished"]
   }
 ]
 
@@ -240,7 +240,7 @@ function App() {
     if (pagingData.searchText.includes(option)) {
       pagingData.searchText.replace(/\[([^\]]*)\]/, (match) => {
         const insideBrackets = match.slice(1, -1); // Remove the square brackets
-        const updatedContent = insideBrackets.split(', ').filter(item => item !== option).join(', '); // Remove 'two'
+        const updatedContent = insideBrackets.split(', ').filter(item => item !== option).join(', '); // Remove the filter
         return `[${updatedContent}]`;
       });
     } else {
@@ -257,7 +257,13 @@ function App() {
   const sortListings = async (option: string) => {
     pagingData.searchText = pagingData.searchText.replace(/\(([^)]*)\)/, `(${option})`);
 
-    await search(`${pagingData.searchText}, Sort: ${option}`);
+    await search(pagingData.searchText);
+  };
+
+  const clearFilters = async () => {
+    setSelectedFilters([]);
+    pagingData.searchText = pagingData.searchText.replace(/\[([^\]]*)\]/, '[None]');
+    await search(pagingData.searchText);
   };
 
 
@@ -317,6 +323,7 @@ function App() {
       </AnimatePresence>
       <header className='header'>
         <h1 className='header-title' onClick={() => window.location.reload()}>We Visit Properties For You</h1>
+        <img src={"./dibby-icon.png"} height={55} style={{ marginRight: 'auto', marginLeft: '15px'}}/>
         <ThemeToggle />
       </header>
       <div>
@@ -344,7 +351,7 @@ function App() {
             <div className='filter-button-container'>
               <button
                 className='filter-btn'
-                onClick={() => setSelectedFilters([])}
+                onClick={clearFilters}
                 disabled={selectedFilters.length === 0 || isLoading}
                 >
                   Clear Filters

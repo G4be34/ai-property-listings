@@ -68,7 +68,6 @@
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  background-color: transparent;
   border-radius: 10px;
   border-color: lightgray;
   cursor: pointer;
@@ -112,7 +111,7 @@
   width: 100%;
   flex-grow: 1;
   border-top: 1px solid lightgray;
-  max-height: calc(100vh - 170px);
+  max-height: calc(100vh - 185px);
 }
 
 .listings-and-button-container {
@@ -295,9 +294,19 @@
 
   .listings-and-button-container {
     overflow: hidden;
+    border-left: none;
   }
 
   .map-and-listings-container {
     max-height: 100%;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+    width: 55%;
+  }
+
+  .header {
+    padding: 1rem 0.5rem;
   }
 }

@@ -12,10 +12,14 @@ type FilterOptionProps = {
   filterListings: (option: string) => Promise<void>;
 };
 
+const numChoices = ["Any", "1+", "2+", "3+", "4+", "5+"];
+
 export function FilterOption({ label, options, selectedFilters, setSelectedFilters, filterListings }: FilterOptionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [numberOfBeds, setNumberOfBeds] = useState("Any");
+  const [numberOfBaths, setNumberOfBaths] = useState("Any");
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -33,6 +37,28 @@ export function FilterOption({ label, options, selectedFilters, setSelectedFilte
     setIsOpen(false);
   };
 
+  const selectFilter = async (option: string) => {
+    if (selectedFilters.includes(option)) {
+      await filterListings(option);
+      setSelectedFilters(selectedFilters.filter((filter) => filter !== option));
+    } else {
+      await filterListings(option);
+      setSelectedFilters([...selectedFilters, option]);
+    }
+  };
+
+  const selectNumberOfBeds = async (option: string) => {
+    setNumberOfBeds(option);
+    await filterListings(`Number of Beds: ${option}`);
+    setIsOpen(false);
+  };
+
+  const selectNumberOfBaths = async (option: string) => {
+    setNumberOfBaths(option);
+    await filterListings(`Number of Baths: ${option}`);
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -47,15 +73,6 @@ export function FilterOption({ label, options, selectedFilters, setSelectedFilte
     };
   }, []);
 
-  const selectFilter = async (option: string) => {
-    if (selectedFilters.includes(option)) {
-      await filterListings(option);
-      setSelectedFilters(selectedFilters.filter((filter) => filter !== option));
-    } else {
-      await filterListings(option);
-      setSelectedFilters([...selectedFilters, option]);
-    }
-  };
 
   return (
     <div ref={dropdownRef} style={{ position: "relative" }}>
@@ -90,6 +107,43 @@ export function FilterOption({ label, options, selectedFilters, setSelectedFilte
               </div>
               <button type="submit" disabled={!minPrice && !maxPrice}>Apply</button>
             </form>
+        ) : (label === "Beds & Baths") ? (
+          <div className="beds-baths-container">
+            <p>Number of Beds</p>
+            <div className="beds-baths">
+              {numChoices.map((choice, index) => (
+                <div
+                  key={index}
+                  className="beds-baths-button"
+                  style={{
+                    backgroundColor: numberOfBeds === choice ? 'lightgray' : '',
+                    borderLeft: index === 0 ? '2px solid lightgray' : '',
+                    color: numberOfBeds === choice ? 'black' : ''
+                  }}
+                  onClick={() => selectNumberOfBeds(choice)}
+                  >
+                    {choice}
+                  </div>
+              ))}
+            </div>
+            <p>Number of Baths</p>
+            <div className="beds-baths">
+              {numChoices.map((choice, index) => (
+                <div
+                  key={index}
+                  className="beds-baths-button"
+                  style={{
+                    backgroundColor: numberOfBaths === choice ? 'lightgray' : '',
+                    borderLeft: index === 0 ? '2px solid lightgray' : '',
+                    color: numberOfBaths === choice ? 'black' : ''
+                  }}
+                  onClick={() => selectNumberOfBaths(choice)}
+                  >
+                    {choice}
+                  </div>
+              ))}
+            </div>
+          </div>
         ) : (
           <ul className="options-container">
             {options.map((option, index) => (
