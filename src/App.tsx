@@ -330,7 +330,7 @@ function App() {
         <div className='main-body-container'>
           <div className='filters-container'>
             <form onSubmit={submitPreference} className='preferences-form'>
-              <input className='preferences-input' type="text" name="preferences" placeholder='Search' />
+              <input className='preferences-input' type="text" name="preferences" placeholder='Enter a city' />
               <button type='submit' className='submit-button' disabled={isLoading}>
                 {isLoading ? <div className='loader'></div> : <CiPaperplane size={25} style={{ strokeWidth: 0.5}} />}
               </button>
