@@ -237,21 +237,28 @@ function App() {
   };
 
   const filterListings = async (option: string) => {
+    let updatedSearchText;
+
     if (pagingData.searchText.includes(option)) {
-      pagingData.searchText.replace(/\[([^\]]*)\]/, (match) => {
+      updatedSearchText = pagingData.searchText.replace(/\[([^\]]*)\]/, (match) => {
         const insideBrackets = match.slice(1, -1); // Remove the square brackets
         const updatedContent = insideBrackets.split(', ').filter(item => item !== option).join(', '); // Remove the filter
         return `[${updatedContent}]`;
       });
     } else {
-      pagingData.searchText.replace(/\[([^\]]*)\]/, (match) => {
+      updatedSearchText = pagingData.searchText.replace(/\[([^\]]*)\]/, (match) => {
         const insideBrackets = match.slice(1, -1); // Remove the square brackets
-        const updatedContent = insideBrackets + ', ' + option; // Add new filter
-        return `[${updatedContent}]`;
+
+        if (insideBrackets === 'None') {
+          return `[${option}]`;
+        } else {
+          const updatedContent = insideBrackets + ', ' + option; // Add new filter
+          return `[${updatedContent}]`;
+        }
       });
     }
 
-    await search(pagingData.searchText);
+    await search(updatedSearchText);
   };
 
   const sortListings = async (option: string) => {
