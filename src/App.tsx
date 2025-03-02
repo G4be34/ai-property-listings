@@ -290,11 +290,8 @@ function App() {
             <Map
               mapboxAccessToken={mapBoxAccessToken}
               mapStyle={"mapbox://styles/mapbox/streets-v12"}
-              initialViewState={{
-                latitude: viewport.latitude,
-                longitude: viewport.longitude,
-                zoom: viewport.zoom
-              }}
+              {...viewport}
+              onMove={e => setViewport(e.viewState)}
               style={{ width: "100%", height: "100vh", position: "absolute", top: 0, left: 0, zIndex: 1 }}
             >
               {listings.map((listing, index) => (
@@ -369,11 +366,8 @@ function App() {
             <Map
               mapboxAccessToken={mapBoxAccessToken}
               mapStyle={"mapbox://styles/mapbox/streets-v12"}
-              initialViewState={{
-                latitude: viewport.latitude,
-                longitude: viewport.longitude,
-                zoom: viewport.zoom
-              }}
+              {...viewport}
+              onMove={e => setViewport(e.viewState)}
               id='map'
               style={{ width: "100%", height: "auto" }}
             >

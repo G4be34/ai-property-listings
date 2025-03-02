@@ -5,9 +5,11 @@ export type ListingRecord = {
   rent: number;
   url: string;
   image: string;
-  beds: number;
-  baths: number;
-  size: string;
+  bedrooms: number;
+  bathrooms: number;
+  sqft: string;
+  latitude: number;
+  longitude: number;
 };
 
 export type Listing = {
@@ -27,14 +29,14 @@ export function mapListings(records: ListingRecord[]): Listing[] {
 
       return {
           title: `Listing in ${record.city}`,
-          price: `$${record.rent.toFixed(2)}/month`,
+          price: `$${record.rent.toFixed(2)}`,
           address: record.address,
           mainImg: record.image,
           link: record.url,
-          beds: record.beds,
-          baths: record.baths,
-          size: record.size,
-          coordinates: []
+          beds: record.bedrooms,
+          baths: record.bathrooms,
+          size: record.sqft,
+          coordinates: [record.longitude, record.latitude]
       };
   });
 };
