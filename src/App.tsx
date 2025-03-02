@@ -191,6 +191,7 @@ function App() {
     try {
       setIsLoading(true);
       // todo: integrate the backend directly into this project so the temporary vercel endpoint isn't needed
+      // const res = await axios.post('http://localhost:3010/search', { text: searchText, page, pageSize });
       const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: searchText, page, pageSize });
       const listingRecords = res.data.matches as ListingRecord[];
       const found = mapListings(listingRecords);
@@ -283,11 +284,8 @@ function App() {
             <Map
               mapboxAccessToken={mapBoxAccessToken}
               mapStyle={"mapbox://styles/mapbox/streets-v12"}
-              initialViewState={{
-                latitude: viewport.latitude,
-                longitude: viewport.longitude,
-                zoom: viewport.zoom
-              }}
+              {...viewport}
+              onMove={evt => setViewport(evt.viewState)}
               style={{ width: "100%", height: "100vh", position: "absolute", top: 0, left: 0, zIndex: 1 }}
             >
               {listings.map((listing, index) => (
@@ -362,11 +360,8 @@ function App() {
             <Map
               mapboxAccessToken={mapBoxAccessToken}
               mapStyle={"mapbox://styles/mapbox/streets-v12"}
-              initialViewState={{
-                latitude: viewport.latitude,
-                longitude: viewport.longitude,
-                zoom: viewport.zoom
-              }}
+              {...viewport}
+              onMove={evt => setViewport(evt.viewState)}
               id='map'
               style={{ width: "100%", height: "auto" }}
             >
