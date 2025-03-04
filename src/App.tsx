@@ -159,8 +159,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [selectedSort, setSelectedSort] = useState<string>('');
-  const [longitude, setLongitude] = useState(-118.26234);
+  const [selectedSort, setSelectedSort] = useState<string>('');// @ts-ignore
+  const [longitude, setLongitude] = useState(-118.26234);// @ts-ignore
   const [latitude, setLatitude] = useState(34.071907);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [pagingData, setPagingData] = useState({
@@ -194,7 +194,6 @@ function App() {
       const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: searchText, page, pageSize });
       const listingRecords = res.data.matches as ListingRecord[];
       const found = mapListings(listingRecords);
-      console.log("found", found)
 
       if(page===0) setListings(found)
       else setListings(found)
