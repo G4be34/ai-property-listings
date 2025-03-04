@@ -194,9 +194,10 @@ function App() {
       const res = await axios.post('https://vite-react-theta-two-40.vercel.app/search', { text: searchText, page, pageSize });
       const listingRecords = res.data.matches as ListingRecord[];
       const found = mapListings(listingRecords);
+      console.log("found", found)
 
       if(page===0) setListings(found)
-      else setListings([...listings, ...found])
+      else setListings(found)
       setPagingData({
         page: res.data.page,
         totalPages: res.data.totalPages,
