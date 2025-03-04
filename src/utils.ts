@@ -3,10 +3,13 @@ export type ListingRecord = {
   city: string;
   address: string;
   rent: number;
-  washer_dryer: boolean;
-  pet_friendly: boolean;
   url: string;
   image: string;
+  bedrooms: number;
+  bathrooms: number;
+  sqft: string;
+  latitude: number;
+  longitude: number;
 };
 
 export type Listing = {
@@ -14,25 +17,26 @@ export type Listing = {
   price: string;
   address: string;
   mainImg: string;
-  subImgs: string[];
-  pros: string[];
   link: string;
+  beds: number;
+  baths: number;
+  size: string;
+  coordinates: number[];
 };
 
 export function mapListings(records: ListingRecord[]): Listing[] {
   return records.map(record => {
-      const pros: string[] = [];
-      if (record.washer_dryer) pros.push("Washer/Dryer included");
-      if (record.pet_friendly) pros.push("Pet-friendly");
 
       return {
           title: `Listing in ${record.city}`,
-          price: `$${record.rent.toFixed(2)}/month`,
+          price: `$${record.rent.toFixed(2)}`,
           address: record.address,
           mainImg: record.image,
-          subImgs: [], // Assuming no sub-images are provided in the original record
-          pros: pros,
-          link: record.url
+          link: record.url,
+          beds: record.bedrooms,
+          baths: record.bathrooms,
+          size: record.sqft,
+          coordinates: [record.longitude, record.latitude]
       };
   });
 };

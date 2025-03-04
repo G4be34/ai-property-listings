@@ -20,9 +20,6 @@ body {
   --input-border: #D4D4D4; /* Input border */
   --button-bg: #D4D4D4; /* Button background */
   --button-bg-hover: #bbb8b8; /* Button hover background */
-  --description-bg: #F5F5F5;
-  --command-bg: #F5F5F5; /* Command container background */
-  --command-hover-bg: #D4D4D4; /* Command hover background */
   --header-bg: #f5f5f5; /* Header background */
   --header-border: #ddd; /* Header border */
   --listing-card-pros-container-bg: #f5f5f5;
@@ -31,6 +28,10 @@ body {
   --listing-card-btn-hover-bg: gray;
   --modal-bg: #f5f5f5;
   --modal-button-bg: black;
+  --map-hover-button-bg: lightgray;
+  --custom-property-btn-bg: black;
+  --custom-property-btn-hover-bg: gray;
+  --custom-property-btn-font-color: white;
 }
 
 /* Dark mode colors */
@@ -41,9 +42,6 @@ body {
   --input-border: #555; /* Dark input border */
   --button-bg: #555; /* Dark button background */
   --button-bg-hover: #444; /* Dark button hover */
-  --description-bg: #333;
-  --command-bg: #333; /* Dark command container */
-  --command-hover-bg: #444; /* Dark command hover */
   --header-bg: #333; /* Dark header background */
   --header-border: #444; /* Dark header border */
   --listing-card-pros-container-bg: #333333;
@@ -52,6 +50,10 @@ body {
   --listing-card-btn-hover-bg: gray;
   --modal-bg: #333;
   --modal-button-bg: gray;
+  --map-hover-button-bg: rgb(118, 118, 118);
+  --custom-property-btn-bg: lightgray;
+  --custom-property-btn-hover-bg: rgb(118, 118, 118);
+  --custom-property-btn-font-color: black;
 }
 
 body {
@@ -175,20 +177,6 @@ header {
   border-bottom: 1px solid var(--header-border);
 }
 
-.description {
-  background-color: var(--description-bg);
-}
-
-.command-container {
-  background-color: var(--command-bg);
-  transition: background-color 0.3s ease;
-}
-
-.command-container:hover {
-  background-color: var(--command-hover-bg);
-  cursor: pointer;
-}
-
 .preferences-input {
   border: 2px solid var(--input-border);
 }
@@ -230,4 +218,35 @@ header {
   background-color: var(--listing-card-btn-hover-bg);
 }
 
+.map-hover-button {
+  background-color: var(--map-hover-button-bg);
+}
 
+.options-container {
+  background-color: var(--listing-card-pros-container-bg);
+}
+
+.price-form {
+  background-color: var(--listing-card-pros-container-bg);
+}
+
+.sort-options {
+  background-color: var(--listing-card-pros-container-bg);
+}
+
+.current-page-circle {
+  border: 2px solid var(--text-color);
+}
+
+.new-property-button {
+  background-color: var(--custom-property-btn-bg);
+  color: var(--custom-property-btn-font-color);
+}
+
+.new-property-button:hover {
+  background-color: var(--custom-property-btn-hover-bg);
+}
+
+.beds-baths-container {
+  background-color: var(--listing-card-pros-container-bg);
+}
