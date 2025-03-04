@@ -270,6 +270,7 @@ function App() {
   const clearFilters = async () => {
     setSelectedFilters([]);
     pagingData.searchText = pagingData.searchText.replace(/\[([^\]]*)\]/, '[None]');
+
     await search(pagingData.searchText);
   };
 
@@ -330,7 +331,7 @@ function App() {
         <img src={"./dibby-icon.png"} height={55} style={{ marginRight: 'auto', marginLeft: '15px'}}/>
         <ThemeToggle />
       </header>
-      <div>
+      <div style={{ display: 'flex', flexGrow: 1}}>
         <div className='main-body-container'>
           <div className='filters-container'>
             <form onSubmit={submitPreference} className='preferences-form'>
