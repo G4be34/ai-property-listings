@@ -10,16 +10,20 @@ type FilterOptionProps = {
   selectedFilters: string[];
   setSelectedFilters: React.Dispatch<React.SetStateAction<string[]>>;
   filterListings: (option: string) => Promise<void>;
+  minPrice: string;
+  setMinPrice: React.Dispatch<React.SetStateAction<string>>;
+  maxPrice: string;
+  setMaxPrice: React.Dispatch<React.SetStateAction<string>>;
+  numberOfBeds: string;
+  setNumberOfBeds: React.Dispatch<React.SetStateAction<string>>;
+  numberOfBaths: string;
+  setNumberOfBaths: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const numChoices = ["Any", "1+", "2+", "3+", "4+", "5+"];
 
-export function FilterOption({ label, options, selectedFilters, setSelectedFilters, filterListings }: FilterOptionProps) {
+export function FilterOption({ label, options, selectedFilters, setSelectedFilters, filterListings, minPrice, setMinPrice, maxPrice, setMaxPrice, numberOfBeds, setNumberOfBeds, numberOfBaths, setNumberOfBaths }: FilterOptionProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [numberOfBeds, setNumberOfBeds] = useState("Any");
-  const [numberOfBaths, setNumberOfBaths] = useState("Any");
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -27,10 +31,34 @@ export function FilterOption({ label, options, selectedFilters, setSelectedFilte
     e.preventDefault();
 
     if (minPrice && maxPrice) {
+      setSelectedFilters((prevFilters) => {
+        if (prevFilters.find(filter => filter.includes("Price range:"))) {
+          const updatedFilters = prevFilters.filter(filter => !filter.includes("Price range:"));
+          return [...updatedFilters, `Price range: ${minPrice}-${maxPrice}`];
+        } else {
+          return [...prevFilters, `Price range: ${minPrice}-${maxPrice}`];
+        }
+      });
       await filterListings(`Price range: ${minPrice}-${maxPrice}`);
     } else if (minPrice) {
+      setSelectedFilters((prevFilters) => {
+        if (prevFilters.find(filter => filter.includes("Minimum Price:"))) {
+          const updatedFilters = prevFilters.filter(filter => !filter.includes("Minimum Price:"));
+          return [...updatedFilters, `Minimum Price: ${minPrice}`];
+        } else {
+          return [...prevFilters, `Minimum Price: ${minPrice}`];
+        }
+      });
       await filterListings(`Minimum Price: ${minPrice}`);
     } else if (maxPrice) {
+      setSelectedFilters((prevFilters) => {
+        if (prevFilters.find(filter => filter.includes("Maximum Price:"))) {
+          const updatedFilters = prevFilters.filter(filter => !filter.includes("Maximum Price:"));
+          return [...updatedFilters, `Maximum Price: ${maxPrice}`];
+        } else {
+          return [...prevFilters, `Maximum Price: ${maxPrice}`];
+        }
+      });
       await filterListings(`Maximum Price: ${maxPrice}`);
     }
 
@@ -39,22 +67,38 @@ export function FilterOption({ label, options, selectedFilters, setSelectedFilte
 
   const selectFilter = async (option: string) => {
     if (selectedFilters.includes(option)) {
-      await filterListings(option);
       setSelectedFilters(selectedFilters.filter((filter) => filter !== option));
-    } else {
       await filterListings(option);
+    } else {
       setSelectedFilters([...selectedFilters, option]);
+      await filterListings(option);
     }
   };
 
   const selectNumberOfBeds = async (option: string) => {
     setNumberOfBeds(option);
+    setSelectedFilters((prevFilters) => {
+      if (prevFilters.find(filter => filter.includes("Number of Beds:"))) {
+        const updatedFilters = prevFilters.filter(filter => !filter.includes("Number of Beds:"));
+        return [...updatedFilters, `Number of Beds: ${option}`];
+      } else {
+        return [...prevFilters, `Number of Beds: ${option}`];
+      }
+    })
     await filterListings(`Number of Beds: ${option}`);
     setIsOpen(false);
   };
 
   const selectNumberOfBaths = async (option: string) => {
     setNumberOfBaths(option);
+    setSelectedFilters((prevFilters) => {
+      if (prevFilters.find(filter => filter.includes("Number of Baths:"))) {
+        const updatedFilters = prevFilters.filter(filter => !filter.includes("Number of Baths:"));
+        return [...updatedFilters, `Number of Baths: ${option}`];
+      } else {
+        return [...prevFilters, `Number of Baths: ${option}`];
+      }
+    })
     await filterListings(`Number of Baths: ${option}`);
     setIsOpen(false);
   };

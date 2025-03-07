@@ -105,3 +105,9 @@
 .option:hover {
   cursor: pointer;
 }
+
+@media (max-width: 1760px) {
+  .filter-button {
+    padding: 5px 10px;
+  }
+}
