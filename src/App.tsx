@@ -163,6 +163,10 @@ function App() {
   const [longitude, setLongitude] = useState(-118.26234);// @ts-ignore
   const [latitude, setLatitude] = useState(34.071907);
   const [isMapOpen, setIsMapOpen] = useState(false);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [numberOfBeds, setNumberOfBeds] = useState("Any");
+  const [numberOfBaths, setNumberOfBaths] = useState("Any");
   const [pagingData, setPagingData] = useState({
     page: 0,
     count: 0,
@@ -269,9 +273,13 @@ function App() {
 
   const clearFilters = async () => {
     setSelectedFilters([]);
-    pagingData.searchText = pagingData.searchText.replace(/\[([^\]]*)\]/, '[None]');
+    setMinPrice("");
+    setMaxPrice("");
+    setNumberOfBeds("Any");
+    setNumberOfBaths("Any");
+    const updatedSearchText = pagingData.searchText.replace(/\[([^\]]*)\]/, '[None]');
 
-    await search(pagingData.searchText);
+    await search(updatedSearchText);
   };
 
 
@@ -349,6 +357,14 @@ function App() {
                   selectedFilters={selectedFilters}
                   setSelectedFilters={setSelectedFilters}
                   filterListings={filterListings}
+                  minPrice={minPrice}
+                  setMinPrice={setMinPrice}
+                  maxPrice={maxPrice}
+                  setMaxPrice={setMaxPrice}
+                  numberOfBeds={numberOfBeds}
+                  setNumberOfBeds={setNumberOfBeds}
+                  numberOfBaths={numberOfBaths}
+                  setNumberOfBaths={setNumberOfBaths}
                   />
               ))}
               <button className='new-property-button' onClick={() => setShowModal(true)}>Send us to visit any property online</button>
